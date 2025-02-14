@@ -1,1 +1,0 @@
-"""Mypinballs platform in MPF."""

@@ -1158,12 +1158,6 @@ multiball_locks:
     reset_all_counts_events: event_handler|event_handler:ms|None
     reset_count_for_current_player_events: event_handler|event_handler:ms|None
     empty_lock_devices_on_ball_end: single|bool|false
-mypinballs:
-    __valid_in__: machine
-    __type__: config
-    port: single|str|
-    baud: single|int|115200
-    debug: single|bool|false
 named_colors:
     __valid_in__: machine
     __type__: list
@@ -1195,43 +1189,6 @@ open_pixel_control:
     debug: single|bool|false
     console_log: single|enum(none,basic,full)|none
     file_log: single|enum(none,basic,full)|basic
-p_roc:
-    __valid_in__: machine
-    __type__: config
-    driverboards: single|enum(wpc,wpcAlphanumeric,wpc95,sternSAM,sternWhitestar,pdb,custom,None)|None
-    lamp_matrix_strobe_time: single|ms|100ms
-    watchdog_time: single|ms|1s
-    use_watchdog: single|bool|true
-    dmd_timing_cycles: list|int|None
-    dmd_update_interval: single|ms|33ms
-    display_flash_frequency: single|float|1.0
-    display_flash_duty: single|float|0.5
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    pd_led_boards: dict|int:subconfig(pd_led_boards)|none
-    use_separate_thread: single|bool|true
-    trace_bus: single|bool|false
-p_roc_coils:
-    polarity: single|bool|None
-p3_roc:
-    driverboards: single|enum(pdb,custom,None)|None
-    lamp_matrix_strobe_time: single|ms|100ms
-    watchdog_time: single|ms|1s
-    use_watchdog: single|bool|true
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    burst_us_per_half_pulse: single|int(0,63)|12
-    burst_number_of_pulses_to_drive_output: single|int(0,31)|5
-    burst_number_of_idle_pulses_before_next: single|int(0,63)|8
-    burst_number_of_burst_pulses_before_check: single|int(0,63)|10
-    burst_ms_between_scans: single|int(1,64)|1
-    pd_led_boards: dict|int:subconfig(pd_led_boards)|none
-    use_separate_thread: single|bool|true
-    trace_bus: single|bool|false
-    gpio_poll_frequency: single|int|50
-    gpio_map: dict|int:enum(input,output)|None
 pin2dmd:
     __valid_in__: machine
     __type__: config

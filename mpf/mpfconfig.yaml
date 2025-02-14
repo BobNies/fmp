@@ -109,12 +109,9 @@ mpf:
     platforms:
         fast: mpf.platforms.fast.fast.FastHardwarePlatform
         i2c_servo_controller: mpf.platforms.i2c_servo_controller.I2CServoControllerHardwarePlatform
-        mypinballs: mpf.platforms.mypinballs.mypinballs.MyPinballsHardwarePlatform
         lisy: mpf.platforms.lisy.lisy.LisyHardwarePlatform
         openpixel: mpf.platforms.openpixel.OpenpixelHardwarePlatform
         opp: mpf.platforms.opp.opp.OppHardwarePlatform
-        p_roc:  mpf.platforms.p_roc.PRocHardwarePlatform
-        p3_roc:  mpf.platforms.p3_roc.P3RocHardwarePlatform
         pkone: mpf.platforms.pkone.pkone.PKONEHardwarePlatform
         pololu_maestro: mpf.platforms.pololu_maestro.PololuMaestroHardwarePlatform
         rpi: mpf.platforms.rpi.rpi.RaspberryPiHardwarePlatform
@@ -216,11 +213,6 @@ logging:
       switch_controller: basic
       text_ui: none
       timers: none
-
-p_roc:
-    lamp_matrix_strobe_time: 100ms
-    watchdog_time: 1s
-    use_watchdog: True
 
 spike:
     wait_times:
