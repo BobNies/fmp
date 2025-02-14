@@ -1018,8 +1018,6 @@ machine_vars:
 mc_custom_code:
     __valid_in__: machine  # used by the MC, ignored by MPF
     __type__: list
-mma8451_accelerometer:
-    i2c_platform: single|str|None
 mode:
     __valid_in__: mode
     __type__: config
@@ -1643,9 +1641,6 @@ steppers:
 stepper_position_settings:
     event: single|str|
     speed: single|int|None
-step_stick_stepper_settings:
-    low_time: single|secs|20ms
-    high_time: single|secs|20ms
 switch_player:
     __valid_in__: machine
     __type__: config_player
@@ -1823,11 +1818,6 @@ virtual_segment_display_connector:
     debug: single|bool|false
     bcp_connection: single|str|local_display
     segment_displays: list|machine(segment_displays)|None
-vpe:
-    __valid_in__: machine
-    __type__: config
-    debug: single|bool|false
-    listen_port: single|int|50051
 widget_player:
     __valid_in__: machine, mode, show
     __type__: config_player

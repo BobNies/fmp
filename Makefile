@@ -11,5 +11,3 @@ coverage:
 sphinx:
 	cd docs/ && sphinx-build -b html -d _build/doctrees  -n -w BUILD_WARNINGS.txt . _build/html; cd ..
 
-mypy:
-	mypy -i mpf --exclude mpf/platforms/visual_pinball_engine/platform_pb2.py

@@ -116,15 +116,11 @@ mpf:
         virtual: mpf.platforms.virtual.VirtualHardwarePlatform
         pololu_tic: mpf.platforms.pololu.pololu_tic.PololuTICHardwarePlatform
         smbus2: mpf.platforms.smbus2.Smbus2
-        mma8451: mpf.platforms.mma8451.MMA8451Platform
         virtual_pinball: mpf.platforms.virtual_pinball.virtual_pinball.VirtualPinballPlatform
         drivers: mpf.platforms.driver_light_platform.DriverLightPlatform
-        step_stick: mpf.platforms.step_stick.StepStickDigitalOutputPlatform
         osc: mpf.platforms.osc.OscPlatform
         spi_bit_bang: mpf.platforms.spi_bit_bang.SpiBitBangPlatform
         light_segment_displays: mpf.platforms.light_segment_displays.LightSegmentDisplaysPlatform
-        pin2dmd: mpf.platforms.pin2dmd.Pin2DmdHardwarePlatform
-        visual_pinball_engine: mpf.platforms.visual_pinball_engine.visual_pinball_engine.VisualPinballEnginePlatform
 
     paths:
         audits: data/audits.yaml
