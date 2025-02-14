@@ -110,14 +110,12 @@ mpf:
         i2c_servo_controller: mpf.platforms.i2c_servo_controller.I2CServoControllerHardwarePlatform
         smart_virtual: mpf.platforms.smart_virtual.SmartVirtualHardwarePlatform
         smartmatrix: mpf.platforms.smartmatrix.SmartMatrixHardwarePlatform
-        snux: mpf.platforms.snux.SnuxHardwarePlatform
-        system11: mpf.platforms.system11.System11OverlayPlatform
+        system11: mpf.platforms.system11.System11OverlayPlatform #used with fast
         virtual: mpf.platforms.virtual.VirtualHardwarePlatform
         pololu_tic: mpf.platforms.pololu.pololu_tic.PololuTICHardwarePlatform
         smbus2: mpf.platforms.smbus2.Smbus2
         virtual_pinball: mpf.platforms.virtual_pinball.virtual_pinball.VirtualPinballPlatform
         drivers: mpf.platforms.driver_light_platform.DriverLightPlatform
-        osc: mpf.platforms.osc.OscPlatform
         light_segment_displays: mpf.platforms.light_segment_displays.LightSegmentDisplaysPlatform
 
     paths:

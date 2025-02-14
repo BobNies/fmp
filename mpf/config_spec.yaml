@@ -1138,14 +1138,6 @@ multiball_locks:
 named_colors:
     __valid_in__: machine
     __type__: list
-osc:
-    __valid_in__: machine
-    __type__: config
-    remote_ip: single|str|127.0.0.1
-    remote_port: single|int|8000
-    listen_ip: single|str|127.0.0.1
-    listen_port: single|int|9000
-    events_to_send: list|event_handler|None
 open_pixel_control:
     __valid_in__: machine
     __type__: config
@@ -1534,12 +1526,6 @@ slide_player:
     max_queue_time: single|secs|None
     animation: ignore
     method: ignore
-snux:
-    __valid_in__: machine
-    __type__: config
-    diag_led_driver: single|machine(coils)|
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
 smartmatrix:
     __valid_in__: machine
     __type__: config_dict
