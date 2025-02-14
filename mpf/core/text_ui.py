@@ -457,7 +457,7 @@ class TextUi(MpfController):
         del name
         del kwargs
         self._pending_bcp_connection = PopUpDialog(self.screen,
-                                                   'WAITING FOR MEDIA CONTROLLER {}:{}'.format(host, port), [])
+                                                   'Connecting: {}:{}'.format(host, port), [])
         self.scene.add_effect(self._pending_bcp_connection)
         self._schedule_draw_screen()
 

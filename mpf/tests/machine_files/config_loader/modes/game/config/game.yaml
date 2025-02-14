@@ -1,8 +1,0 @@
-#config_version=6
-
-event_player:
-  test_event: another_event
-
-shows:
-  game_show:
-    - duration: 1
