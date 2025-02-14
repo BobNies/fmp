@@ -358,10 +358,6 @@ dual_wound_coils:
     main_coil: single|machine(coils)|
     hold_coil: single|machine(coils)|
     eos_switch: single|machine(switches)|None
-opp_coils:
-    recycle_factor: single|int|None
-pkone_coils:
-    recycle_ms: single|ms|None
 coil_player:
     __valid_in__: machine, mode, show
     __type__: config_player
@@ -966,23 +962,6 @@ light_player:
     color: single|str|white
     fade: single|ms_or_token|None
     priority: single|int_or_token|0
-lisy:
-    __valid_in__: machine
-    __type__: config
-    baud: single|int|None
-    debug: single|bool|false
-    display_flash_frequency: single|float|1.0
-    display_flash_duty: single|float|0.5
-    disable_dtr: single|bool|true
-    connection: single|enum(network,serial)|network
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    max_led_batch_size: single|int|12
-    network_host: single|str|None
-    network_port: single|int|None
-    poll_hz: single|int|100
-    port: single|str|None
-    send_length_after_command: single|bool|false
 logic_blocks_common:
     enable_events: event_handler|event_handler:ms|None
     disable_events: event_handler|event_handler:ms|None
@@ -1169,18 +1148,6 @@ osc:
     listen_ip: single|str|127.0.0.1
     listen_port: single|int|9000
     events_to_send: list|event_handler|None
-opp:
-    __valid_in__: machine
-    __type__: config
-    driverboards: single|enum(gen2)|gen2
-    ports: list|str|
-    baud: single|int|115200
-    debug: single|bool|false
-    chains: dict|str:str|None
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    poll_hz: single|int|100
-    incand_update_hz: single|int|25
 open_pixel_control:
     __valid_in__: machine
     __type__: config

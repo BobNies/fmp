@@ -109,9 +109,6 @@ mpf:
     platforms:
         fast: mpf.platforms.fast.fast.FastHardwarePlatform
         i2c_servo_controller: mpf.platforms.i2c_servo_controller.I2CServoControllerHardwarePlatform
-        lisy: mpf.platforms.lisy.lisy.LisyHardwarePlatform
-        openpixel: mpf.platforms.openpixel.OpenpixelHardwarePlatform
-        opp: mpf.platforms.opp.opp.OppHardwarePlatform
         pkone: mpf.platforms.pkone.pkone.PKONEHardwarePlatform
         pololu_maestro: mpf.platforms.pololu_maestro.PololuMaestroHardwarePlatform
         rpi: mpf.platforms.rpi.rpi.RaspberryPiHardwarePlatform
