@@ -1593,16 +1593,6 @@ speedometers:
     __type__: device
     start_switch: single|machine(switches)|None
     stop_switch: single|machine(switches)|None
-spi_bit_bang:
-    __valid_in__: machine
-    __type__: config
-    debug: single|bool|false
-    miso_pin: single|machine(switches)|
-    clock_pin: single|machine(digital_outputs)|
-    cs_pin: single|machine(digital_outputs)|
-    bit_time: single|secs|50ms
-    clock_time: single|ms|1ms
-    inputs: single|int|8
 spinners:
     __valid_in__: machine
     __type__: device
@@ -1778,15 +1768,6 @@ transitions:
         duration: single|secs|2
     none:
         type: ignore
-twitch_client:
-    __valid_in__: machine
-    __type__: config
-    user: single|str|None
-    password: single|str|None
-    channel: single|str|None
-    user_var: single|str|None
-    password_var: single|str|None
-    channel_var: single|str|None
 variable_player:
     __valid_in__: machine, mode
     __type__: config_player

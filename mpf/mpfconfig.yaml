@@ -103,7 +103,6 @@ mpf:
         - mpf.plugins.info_lights.InfoLights
         - mpf.plugins.platform_integration_test_runner.MpfPlatformIntegrationTestRunner
         - mpf.plugins.switch_player.SwitchPlayer
-        - mpf.plugins.twitch_bot.TwitchBot
         - mpf.plugins.virtual_segment_display_connector.VirtualSegmentDisplayConnector
 
     platforms:
@@ -119,7 +118,6 @@ mpf:
         virtual_pinball: mpf.platforms.virtual_pinball.virtual_pinball.VirtualPinballPlatform
         drivers: mpf.platforms.driver_light_platform.DriverLightPlatform
         osc: mpf.platforms.osc.OscPlatform
-        spi_bit_bang: mpf.platforms.spi_bit_bang.SpiBitBangPlatform
         light_segment_displays: mpf.platforms.light_segment_displays.LightSegmentDisplaysPlatform
 
     paths:
