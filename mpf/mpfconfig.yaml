@@ -107,7 +107,6 @@ mpf:
         - mpf.plugins.virtual_segment_display_connector.VirtualSegmentDisplayConnector
 
     platforms:
-        fadecandy: mpf.platforms.fadecandy.FadecandyHardwarePlatform
         fast: mpf.platforms.fast.fast.FastHardwarePlatform
         i2c_servo_controller: mpf.platforms.i2c_servo_controller.I2CServoControllerHardwarePlatform
         mypinballs: mpf.platforms.mypinballs.mypinballs.MyPinballsHardwarePlatform
@@ -234,14 +233,6 @@ spike:
       114: 100  # set led mask (init only)
       240: 100  # settraffic (init only)
       241: 100  # reset bus (init only)
-
-fadecandy:
-    gamma: 2.5
-    whitepoint: [1.0, 1.0, 1.0]
-    linear_slope: 1.0
-    linear_cutoff: 0.0
-    keyframe_interpolation: True
-    dithering: True
 
 modes:
     - attract
