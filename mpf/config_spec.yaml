@@ -1156,23 +1156,6 @@ open_pixel_control:
     debug: single|bool|false
     console_log: single|enum(none,basic,full)|none
     file_log: single|enum(none,basic,full)|basic
-pin2dmd:
-    __valid_in__: machine
-    __type__: config
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    resolution: single|enum(128x32,192x64,256x64)|128x32
-    panel: single|enum(rgb,rbg)|rgb
-pkone:
-    __valid_in__: machine
-    __type__: config
-    port: single|str|
-    baud: single|int|115200
-    watchdog: single|ms|1000
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
 pd_led_boards:
     use_ws281x_0: single|bool|false
     use_ws281x_1: single|bool|false
@@ -1250,15 +1233,6 @@ playfield_transfers:
 plugins:
     __valid_in__: machine                      # todo add to validator
     __type__: list
-pololu_maestro:
-    __valid_in__: machine
-    __type__: config
-    port: single|str|
-    servo_min: single|int|3000
-    servo_max: single|int|9000
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    debug: single|bool|false
 pololu_tic:
     __valid_in__: machine
     __type__: config
@@ -1293,28 +1267,6 @@ rgb_dmds:
     channel_order: single|lstr|rgb
     gamma: single|float|2.2
     hardware_brightness: single|template_float|1.0
-rpi_dmd:
-    __valid_in__:       machine
-    __type__: config
-    hardware_mapping:   single|enum(regular,adafruit-hat,adafruit-hat-pwm)|regular
-    rows:               single|int|32
-    cols:               single|int|32
-    chain_length:       single|int|1
-    parallel:           single|int|1
-    pwm_bits:           single|int|11
-    pwm_lsb_nanoseconds: single|int|130
-    brightness:         single|int|100
-    scan_mode:          single|int|0
-    multiplexing:       single|int|0
-    row_address_type:   single|int|0
-    disable_hardware_pulsing: single|bool|false
-    show_refresh_rate:  single|bool|false
-    inverse_colors:     single|bool|false
-    led_rgb_sequence:   single|str|RGB
-    pixel_mapper_config: single|str|""
-    gpio_slowdown:      single|int|1
-    daemon:             single|bool|false
-    drop_privileges:    single|bool|true
 score_queue_player:
     __valid_in__: mode
     __type__: config_player
@@ -1653,39 +1605,6 @@ spi_bit_bang:
     bit_time: single|secs|50ms
     clock_time: single|ms|1ms
     inputs: single|int|8
-spike:
-    __valid_in__: machine
-    __type__: config
-    debug: single|bool|false
-    port: single|str|
-    baud: single|int|
-    bridge_path: single|str|/bin/bridge
-    bridge_debug: single|bool|false
-    bridge_debug_log: single|str|/mnt/spike.log
-    runtime_baud: single|int|921600
-    flow_control: single|bool|false
-    nodes: list|int|
-    poll_hz: single|int|1000
-    use_send_key: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    wait_times: dict|int:int|None
-    spike_version: single|enum(1,2)|1
-    max_led_batch_size: single|int|6
-    response_time: single|int|837
-    verify_checksums_on_readback: single|bool|true
-    periodically_query_nodes: single|bool|false
-    oc_time: single|ms|100
-    default_debounce_open: single|ms|4
-    default_debounce_close: single|ms|4
-    node_config: dict|int:subconfig(spike_node)|None
-spike_switch_overwrites:
-    debounce_open: single|ms|None
-    debounce_close: single|ms|None
-spike_node:
-    coil_priorities: list|int|None
-    num_leds: single|int|None
-    num_inputs: single|int|None
 spinners:
     __valid_in__: machine
     __type__: device
@@ -1724,20 +1643,6 @@ steppers:
 stepper_position_settings:
     event: single|str|
     speed: single|int|None
-spike_stepper_settings:
-    homing_speed: single|int|10
-    speed: single|int|20
-    poll_ms: single|ms|100ms
-    light_number: single|str|
-steprocker_stepper_settings:
-    homing_speed: single|float|1.0
-    fullstep_per_userunit: single|float|1.0
-    move_current: single|int|20
-    hold_current: single|int|0
-    poll_ms: single|ms|100ms
-    microstep_per_fullstep: single|int|16
-    velocity_limit: single|float|1.0
-    acceleration_limit: single|float|1.0
 step_stick_stepper_settings:
     low_time: single|secs|20ms
     high_time: single|secs|20ms
@@ -1878,10 +1783,6 @@ transitions:
         duration: single|secs|2
     none:
         type: ignore
-trinamics_steprocker:
-    __valid_in__: machine
-    __type__: config
-    port: single|str|
 twitch_client:
     __valid_in__: machine
     __type__: config

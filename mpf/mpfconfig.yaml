@@ -109,16 +109,11 @@ mpf:
     platforms:
         fast: mpf.platforms.fast.fast.FastHardwarePlatform
         i2c_servo_controller: mpf.platforms.i2c_servo_controller.I2CServoControllerHardwarePlatform
-        pkone: mpf.platforms.pkone.pkone.PKONEHardwarePlatform
-        pololu_maestro: mpf.platforms.pololu_maestro.PololuMaestroHardwarePlatform
-        rpi: mpf.platforms.rpi.rpi.RaspberryPiHardwarePlatform
         smart_virtual: mpf.platforms.smart_virtual.SmartVirtualHardwarePlatform
         smartmatrix: mpf.platforms.smartmatrix.SmartMatrixHardwarePlatform
         snux: mpf.platforms.snux.SnuxHardwarePlatform
         system11: mpf.platforms.system11.System11OverlayPlatform
         virtual: mpf.platforms.virtual.VirtualHardwarePlatform
-        spike: mpf.platforms.spike.spike.SpikePlatform
-        trinamics_steprocker: mpf.platforms.trinamics_steprocker.TrinamicsStepRocker
         pololu_tic: mpf.platforms.pololu.pololu_tic.PololuTICHardwarePlatform
         smbus2: mpf.platforms.smbus2.Smbus2
         mma8451: mpf.platforms.mma8451.MMA8451Platform
@@ -126,7 +121,6 @@ mpf:
         drivers: mpf.platforms.driver_light_platform.DriverLightPlatform
         step_stick: mpf.platforms.step_stick.StepStickDigitalOutputPlatform
         osc: mpf.platforms.osc.OscPlatform
-        rpi_dmd: mpf.platforms.rpi_dmd.RpiDmdPlatform
         spi_bit_bang: mpf.platforms.spi_bit_bang.SpiBitBangPlatform
         light_segment_displays: mpf.platforms.light_segment_displays.LightSegmentDisplaysPlatform
         pin2dmd: mpf.platforms.pin2dmd.Pin2DmdHardwarePlatform
@@ -210,18 +204,6 @@ logging:
       switch_controller: basic
       text_ui: none
       timers: none
-
-spike:
-    wait_times:
-      20: 100   # setnumledsinputs (init only)
-      65: 25    # rules (runtime)
-      68: 100   # set ove current (init only)
-      70: 100   # set coil mask (init only)
-      72: 100   # set overcurrent time (init only)
-      112: 10   # configure input (init only)
-      114: 100  # set led mask (init only)
-      240: 100  # settraffic (init only)
-      241: 100  # reset bus (init only)
 
 modes:
     - attract
