@@ -13,7 +13,6 @@ from mpf.core.platform import (RgbDmdPlatform, DriverConfig, DriverSettings,
 from mpf.core.utility_functions import Util
 from mpf.exceptions.config_file_error import ConfigFileError
 from mpf.exceptions.runtime_error import MpfRuntimeError
-from mpf.platforms.fast import fast_defines
 from mpf.platforms.fast.fast_audio import FASTAudioInterface
 from mpf.platforms.fast.fast_dmd import FASTDMD
 from mpf.platforms.fast.fast_driver import FASTDriver
@@ -38,12 +37,12 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
 
     """Platform class for the FAST Pinball hardware."""
 
-    __slots__ = ["config", "configured_ports", "machine_type", "is_retro",
+    __slots__ = ["config", "configured_ports", "machine_type",
                  "serial_connections", "fast_rgb_leds", "fast_exp_leds", "fast_segs",
                  "exp_boards_by_address", "exp_boards_by_name", "exp_breakout_boards",
                  "exp_breakouts_with_leds", "hw_switch_data", "new_switch_data",
                  "io_boards", "io_boards_by_name", "switches_initialized",
-                 "drivers_initialized", "audio_interface"]
+                 "drivers_initialized"]
 
     port_types = ['net', 'exp', 'aud', 'dmd', 'rgb', 'seg', 'emu']
 
@@ -65,26 +64,8 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
             if self.config[port_type]:
                 self.configured_ports.append(port_type)
 
-        try:
-            self.machine_type = self.config["net"]["controller"]
-        except KeyError:
-            self.machine_type = 'no_net'
-
-        if self.machine_type in ['sys11', 'wpc89', 'wpc95']:
-            self.debug_log("Configuring the FAST Controller for Retro driver board")
-            self.is_retro = True
-        elif self.machine_type in ['neuron', 'nano']:
-            self.debug_log("Configuring FAST Controller for FAST I/O boards.")
-            self.is_retro = False
-        elif self.machine_type == 'no_net':
-            pass
-        else:
-            self.raise_config_error(f'Unknown machine_type "{self.machine_type}" configured fast.', 6)
-
-        # Even though System11 uses ticks, that's handled on the Overlay and not needed here.
+        self.machine_type = 'neuron'
         self.features['tickless'] = True
-        # Most FAST platforms don't use ticks, but System11 does
-        #self.features['tickless'] = self.machine_type != 'sys11'
         self.features['max_pulse'] = 25500
 
         self.serial_connections = dict()
@@ -101,7 +82,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
         self.io_boards_by_name = dict()     # type: Dict[str, FastIoBoard]
         self.switches_initialized = False
         self.drivers_initialized = False
-        self.audio_interface = None
 
     def get_info_string(self):
         """Dump info strings about attached FAST hardware."""
@@ -230,14 +210,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
                     from mpf.platforms.fast.communicators.net_neuron import \
                         FastNetNeuronCommunicator
                     communicator = FastNetNeuronCommunicator(platform=self, processor=port, config=config)
-                elif config['controller'] == 'nano':
-                    from mpf.platforms.fast.communicators.net_nano import \
-                        FastNetNanoCommunicator
-                    communicator = FastNetNanoCommunicator(platform=self, processor=port, config=config)
-                elif config['controller'] in ['sys11', 'wpc89', 'wpc95']:
-                    from mpf.platforms.fast.communicators.net_retro import \
-                        FastNetRetroCommunicator
-                    communicator = FastNetRetroCommunicator(platform=self, processor=port, config=config)
                 else:
                     raise AssertionError("Unknown controller type")  # TODO better error
                 self.serial_connections['net'] = communicator
@@ -377,17 +349,9 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
         if not number:
             raise AssertionError("Driver needs a number")
 
-        # For a Retro Controller, look up the driver number
-        if self.is_retro:
-            try:
-                index = int(fast_defines.RETRO_DRIVER_MAP[number.upper()], 16)
-            except KeyError:
-                self.raise_config_error(f"Could not find Retro driver {number}", 1)
-
         # If we have FAST I/O boards, parse the config into a FAST hex driver number
-        elif self.machine_type in ['nano', 'neuron']:
+        if self.machine_type in ['nano', 'neuron']:
             index = self._parse_driver_number(number)
-
         else:
             raise AssertionError("Invalid machine type: {self.machine_type}")
 
@@ -509,12 +473,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
         If a connection type is not specified, this method will use some
         intelligence to try to figure out which default should be used.
 
-        If the DriverBoard type is ``fast`` and the firmware is legacy (v1),
-        then mpf assumes the default is ``network``. If it's a v2 firmware or
-        any other type of board (``sys11``, ``wpc95``, ``wpc89``) then mpf
-        assumes the connection type is ``local``. Connection types can be mixed
-        and matched in the same machine.
-
         Args:
         ----
             number: Number of this switch.
@@ -531,18 +489,11 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
                                  "switch, but no connection to a NET processor"
                                  "is available")
 
-        if self.is_retro:
-            # translate switch num to FAST switch
-            try:
-                number = fast_defines.RETRO_SWITCH_MAP[str(number).upper()]
-            except KeyError:
-                self.raise_config_error(f"Could not find switch {number}", 2)
-        else:
-            try:
-                number = self._parse_switch_number(number)
-            except ValueError:
-                self.raise_config_error(f"Could not parse switch number {config.name}/{number}. Seems "
-                                        "to be not a valid switch number for the FAST platform.", 8)
+        try:
+            number = self._parse_switch_number(number)
+        except ValueError:
+            self.raise_config_error(f"Could not parse switch number {config.name}/{number}. Seems "
+                                    "to be not a valid switch number for the FAST platform.", 8)
 
         switch = self.serial_connections['net'].switches[int(number, 16)]
         switch.set_initial_config(config, platform_config)
@@ -740,23 +691,11 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
         return [{"number": f"{index}-{i}"} for i in range(3)]
 
     def _parse_gi_light_number(self, number):
-        if self.is_retro:  # translate matrix/map number to FAST GI number
-            try:
-                number = fast_defines.RETRO_GI_MAP[str(number).upper()]
-            except KeyError:
-                self.raise_config_error(f"Could not find GI {number}", 3)
-        else:
-            number = Util.int_to_hex_string(number)
+        number = Util.int_to_hex_string(number)
         return [{"number": number}]
 
     def _parse_matrix_light_number(self, number):
-        if self.is_retro:  # translate matrix number to FAST light num
-            try:
-                number = fast_defines.RETRO_LIGHT_MAP[str(number).upper()]
-            except KeyError:
-                self.raise_config_error(f"Could not find light {number}", 4)
-        else:
-            number = Util.int_to_hex_string(number)
+        number = Util.int_to_hex_string(number)
         return [{"number": number}]
 
     def configure_rgb_dmd(self, name):
@@ -767,14 +706,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
                                  "available.")
 
         return FASTDMD(self.machine, name, self.serial_connections['dmd'])
-
-    def configure_audio_interface(self):
-        """Configure a hardware FAST audio controller."""
-        if 'aud' not in self.serial_connections:
-            self.log.debug("Skipping FAST Audio Interface because there's no 'aud:' section in the FAST config.")
-            return None
-
-        return FASTAudioInterface(self.machine, self.serial_connections['aud'])
 
     async def configure_segment_display(self, number: str, display_size: int, platform_settings) -> FASTSegmentDisplay:
         """Configure a segment display."""
