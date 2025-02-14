@@ -1,5 +1,4 @@
 """FAST Neuron Serial Communicator."""
-# mpf/platforms/fast/communicators/net_neuron.py
 
 from packaging import version
 
