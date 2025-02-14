@@ -35,8 +35,6 @@ mpf:
         variable: mpf.config_players.variable_player.VariablePlayer
         segment_display_player: mpf.config_players.segment_display_player.SegmentDisplayPlayer
         slide_player: mpf.config_players.slide_player.SlidePlayer
-        sound_player: mpf.config_players.sound_player.SoundPlayer
-        hardware_sound_player: mpf.config_players.hardware_sound_player.HardwareSoundPlayer
         score_queue_player: mpf.config_players.score_queue_player.ScoreQueuePlayer
         blinkenlight: mpf.config_players.blinkenlight_player.BlinkenlightPlayer
         widget_player: mpf.config_players.widget_player.WidgetPlayer
@@ -90,7 +88,6 @@ mpf:
         segment_displays: mpf.devices.segment_display.segment_display.SegmentDisplay
         sequence_shots: mpf.devices.sequence_shot.SequenceShot
         speedometers: mpf.devices.speedometer.Speedometer
-        hardware_sound_systems: mpf.devices.hardware_sound_system.HardwareSoundSystem
         steppers: mpf.devices.stepper.Stepper
         state_machines: mpf.devices.state_machine.StateMachine
         score_queues: mpf.devices.score_queue.ScoreQueue
