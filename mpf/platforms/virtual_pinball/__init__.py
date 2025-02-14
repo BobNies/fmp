@@ -1,1 +1,0 @@
-"""VPX platform in MPF."""

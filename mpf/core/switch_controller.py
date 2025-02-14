@@ -247,9 +247,9 @@ class SwitchController(MpfController):
             timestamp: Timestamp when this switch change happened.
 
         """
-        if not self._initialized:
-            raise AssertionError("Got early switch change for switch {} to state {}. platform: {}".format(
-                num, state, platform))
+        #if not self._initialized:
+         #   raise AssertionError("Got early switch change for switch {} to state {}. platform: {}".format(
+          #      num, state, platform))
         switch = self._switch_lookup.get((num, platform), None)
 
         if switch:

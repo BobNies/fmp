@@ -113,7 +113,6 @@ mpf:
         virtual: mpf.platforms.virtual.VirtualHardwarePlatform
         pololu_tic: mpf.platforms.pololu.pololu_tic.PololuTICHardwarePlatform
         smbus2: mpf.platforms.smbus2.Smbus2
-        virtual_pinball: mpf.platforms.virtual_pinball.virtual_pinball.VirtualPinballPlatform
         drivers: mpf.platforms.driver_light_platform.DriverLightPlatform
 
     paths:
