@@ -892,11 +892,6 @@ light_settings:
     color_correction_profiles: dict|str:subconfig(color_correction_profile)|None
     default_color_correction_profile: single|str|None
     default_fade_ms: single|int|0
-light_segment_displays:
-    __valid_in__: machine
-    __type__: config
-    display_flash_frequency: single|float|1.0
-    display_flash_duty: single|float|0.5
 light_stripes:
     __valid_in__: machine
     __type__: device
@@ -1306,10 +1301,6 @@ segment_displays:
     platform_settings: single|dict|None
     platform: single|str|None
     update_method: single|str|None
-light_segment_displays_device:
-    lights: list|dict(str:machine(lights))|None
-    light_groups: list|machine(neoseg_displays)|None
-    type: single|enum(7segment,bcd,8segment,14segment,16segment)|
 segment_display_player:
     __valid_in__: machine, mode, show
     __type__: config_player
@@ -1526,14 +1517,6 @@ slide_player:
     max_queue_time: single|secs|None
     animation: ignore
     method: ignore
-smartmatrix:
-    __valid_in__: machine
-    __type__: config_dict
-    port: single|str|
-    baud: single|int|
-    old_cookie: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
 smart_virtual:
     __valid_in__: machine
     __type__: config
