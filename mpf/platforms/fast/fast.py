@@ -10,13 +10,11 @@ from mpf.core.platform import (DriverConfig, DriverSettings,
                                ServoPlatform, StepperPlatform,
                                SwitchConfig, SwitchSettings)
 from mpf.core.utility_functions import Util
-from mpf.exceptions.config_file_error import ConfigFileError
 from mpf.exceptions.runtime_error import MpfRuntimeError
 from mpf.platforms.fast.fast_driver import FASTDriver
 from mpf.platforms.fast.fast_gi import FASTGIString
 from mpf.platforms.fast.fast_io_board import FastIoBoard
-from mpf.platforms.fast.fast_led import (FASTRGBLED, FASTLEDChannel,
-                                         FASTExpLED)
+from mpf.platforms.fast.fast_led import (FASTLEDChannel, FASTExpLED)
 from mpf.platforms.fast.fast_light import FASTMatrixLight
 from mpf.platforms.fast.fast_port_detector import FastPortDetector
 from mpf.platforms.fast.fast_servo import FastServo
@@ -33,13 +31,13 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
     """Platform class for the FAST Pinball hardware."""
 
     __slots__ = ["config", "configured_ports", "machine_type",
-                 "serial_connections", "fast_rgb_leds", "fast_exp_leds",
+                 "serial_connections", "fast_exp_leds",
                  "exp_boards_by_address", "exp_boards_by_name", "exp_breakout_boards",
                  "exp_breakouts_with_leds", "hw_switch_data", "new_switch_data",
                  "io_boards", "io_boards_by_name", "switches_initialized",
                  "drivers_initialized"]
 
-    port_types = ['net', 'exp', 'aud', 'rgb', 'emu']
+    port_types = ['net', 'exp', 'emu']
 
     def __init__(self, machine):
         """Initialize FAST hardware platform.
@@ -64,7 +62,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
         self.features['max_pulse'] = 25500
 
         self.serial_connections = dict()
-        self.fast_rgb_leds = dict()
         self.fast_exp_leds = dict()
         self.exp_boards_by_address = dict()  # k: EE address, v: FastExpansionBoard instances
         self.exp_boards_by_name = dict()  # k: str name, v: FastExpansionBoard instances
@@ -213,21 +210,11 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
                     FastExpCommunicator
                 communicator = FastExpCommunicator(platform=self, processor=port, config=config)
                 self.serial_connections['exp'] = communicator
-            elif port == 'aud':
-                from mpf.platforms.fast.communicators.aud import \
-                    FastAudCommunicator
-                communicator = FastAudCommunicator(platform=self, processor=port, config=config)
-                self.serial_connections['aud'] = communicator
             elif port == 'emu':
                 from mpf.platforms.fast.communicators.emu import \
                     FastEmuCommunicator
                 communicator = FastEmuCommunicator(platform=self, processor=port, config=config)
                 self.serial_connections['emu'] = communicator
-            elif port == 'rgb':
-                from mpf.platforms.fast.communicators.rgb import \
-                    FastRgbCommunicator
-                communicator = FastRgbCommunicator(platform=self, processor=port, config=config)
-                self.serial_connections['rgb'] = communicator
             else:
                 raise AssertionError("Unknown processor type")  # TODO better error
 
@@ -334,7 +321,7 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
             raise AssertionError("Driver needs a number")
 
         # If we have FAST I/O boards, parse the config into a FAST hex driver number
-        if self.machine_type in ['nano', 'neuron']:
+        if self.machine_type == 'neuron':
             index = self._parse_driver_number(number)
         else:
             raise AssertionError("Invalid machine type: {self.machine_type}")
@@ -553,25 +540,8 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
 
                 fast_led_channel = FASTLEDChannel(self.fast_exp_leds[this_led_number], channel)
                 self.fast_exp_leds[this_led_number].add_channel(int(channel), fast_led_channel)
-
             else:
-                # Nano LED
-
-                try:
-                    number = self.port_idx_to_hex(parts[0], parts[1], 64)
-                except IndexError:
-                    # this is a legacy LED number as an int
-                    number = f'{int(parts[0]):02X}'
-
-                if number not in self.fast_rgb_leds:
-                    try:
-                        self.fast_rgb_leds[number] = FASTRGBLED(number, self)
-                    except KeyError:
-                        # This number is not valid
-                        raise ConfigFileError(f"Invalid LED number: {'_'.join(parts)}", 3, self.log.name)
-
-                fast_led_channel = FASTLEDChannel(self.fast_rgb_leds[number], channel)
-                self.fast_rgb_leds[number].add_channel(int(channel), fast_led_channel)
+                raise AssertionError(f"Unknown light: {subtype}")
 
             return fast_led_channel
         raise AssertionError(f"Unknown light subtype {subtype}")

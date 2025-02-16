@@ -613,11 +613,7 @@ fast:
     __type__: config
     net: single|subconfig(fast_net)|None
     exp: single|subconfig(fast_exp)|None
-    aud: single|subconfig(fast_aud)|None
-    seg: single|subconfig(fast_seg)|None
-    dmd: single|subconfig(fast_dmd)|None
     emu: single|subconfig(fast_emu)|None
-    rgb: single|subconfig(fast_rgb)|None
     debug: single|bool|false
     console_log: single|enum(none,basic,full)|none
     file_log: single|enum(none,basic,full)|basic
@@ -628,7 +624,7 @@ fast_net:
     debug: single|bool|false
     console_log: single|enum(none,basic,full)|none
     file_log: single|enum(none,basic,full)|basic
-    controller: single|enum(neuron,nano)|
+    controller: single|enum(neuron)|
     watchdog: single|ms|1000
     default_quick_debounce_open: single|ms|2
     default_quick_debounce_close: single|ms|2
@@ -662,72 +658,12 @@ fast_led_port:
     port: single|str|
     type: single|enum(ws2812,apa-102)|ws2812
     leds: single|int|32
-fast_aud:
-    port: list|str|auto
-    baud: single|int|230400
-    debug: single|bool|false
-    optional: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    pin1_pulse_time: single|ms|100
-    pin2_pulse_time: single|ms|100
-    pin3_pulse_time: single|ms|100
-    pin4_pulse_time: single|ms|100
-    pin5_pulse_time: single|ms|100
-    pin6_pulse_time: single|ms|100
-    reset_pulse_time: single|ms|100
-    power_pulse_time: single|ms|100
-    watchdog: single|ms|1000
-    persist_volume_settings: single|bool|true
-    main_steps: single|int|20
-    sub_steps: single|int|20
-    headphones_steps: single|int|20
-    default_main_volume: single|int|10
-    default_sub_volume: single|int|10
-    default_headphones_volume: single|int|10
-    max_hw_volume_main: single|int|63
-    max_hw_volume_sub: single|int|63
-    max_hw_volume_headphones: single|int|63
-    main_amp_enabled: single|bool|true
-    sub_amp_enabled: single|bool|true
-    headphones_amp_enabled: single|bool|true
-    main_levels_list: list|int|None
-    sub_levels_list: list|int|None
-    headphones_levels_list: list|int|None
-    headphones_level: single|enum(headphones,line)|headphones
-    mute_speakers_with_headphones: single|bool|true
-    link_main_to_main: single|bool|false
-    link_sub_to_main: single|bool|true
-    link_headphones_to_main: single|bool|false
-
-fast_seg:
-    port: list|str|auto
-    baud: single|int|230400
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    fps: single|int|20
-fast_dmd:
-    port: list|str|auto
-    baud: single|int|2000000
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    fps: single|int|20
 fast_emu:
     port: list|str|auto
     baud: single|int|230400
     debug: single|bool|false
     console_log: single|enum(none,basic,full)|none
     file_log: single|enum(none,basic,full)|basic
-fast_rgb:
-    port: list|str|auto
-    baud: single|int|921600
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-    led_hz: single|int|30
-    ignore_reboot: single|bool|true
 fast_switches:
     debounce_open: single|ms|None
     debounce_close: single|ms|None
