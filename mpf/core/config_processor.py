@@ -151,7 +151,7 @@ class ConfigProcessor:
             raise ConfigFileError("Config should be a dict: {}".format(config), 1, self.log.name, filename)
 
         invalid_080 = ["playlists", "playlist_player", "slides", "sounds", "sound_loop_player",
-                       "sound_loop_sets", "sound_system", "track_player", "widgets"]
+                       "sound_loop_sets", "sound_system", "track_player"]
         for k in config.keys():
             if k in config_spec:
                 if config_type not in config_spec[k]['__valid_in__']:

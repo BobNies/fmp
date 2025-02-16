@@ -65,9 +65,6 @@ achievements:
     sync_ms: single|int|None
     speed: single|float|1
 
-animations:
-    __valid_in__: machine, mode                 # todo add to validator
-    __allow_others__:
 assets:
     __valid_in__: machine, mode
     __type__: config
@@ -1234,21 +1231,6 @@ show_queues:
 shows:
     __valid_in__: machine, mode                      # todo add to validator
     __type__: named_lists
-slide_player:
-    __valid_in__: machine, mode, show
-    __type__: config_player
-    target: single|str|None
-    priority: single|int_or_token|None               # todo should this be 0?
-    transition: ignore
-    transition_out: ignore
-    expire: single|secs|None
-    slide: single|str|None
-    tokens: dict|str:str|None
-    action: single|enum(play,remove,method,animation,update,preload,queue,queue_first,queue_immediate)|play
-    queue: single|str|None
-    max_queue_time: single|secs|None
-    animation: ignore
-    method: ignore
 smart_virtual:
     __valid_in__: machine
     __type__: config
@@ -1434,176 +1416,6 @@ variable_player:
 virtual_platform_start_active_switches:
     __valid_in__: machine                           # todo add to validator
     __type__: list
-widget_player:
-    __valid_in__: machine, mode, show
-    __type__: config_player
-    priority: single|int_or_token|None
-    slide: single|str|None
-    action: single|enum(play,remove,update,preload,animation,method)|play
-    animation: ignore
-    method: ignore
-    key: single|str|None
-    target: single|str|None
-    expire: single|secs|None
-    tokens: dict|str:str|None
-    x: single|int|0
-    y: single|int|0
-widget_styles:
-    __valid_in__: machine, mode
-    __type__: config_dict
-    color: single|kivycolor|ffffffff
-    __allow_others__:
-    # TODO: add all valid attributes
-widgets:
-    __valid_in__: machine, mode
-    __type__: named_lists
-    common:
-        type: single|str|
-        x: single|str|None
-        y: single|str|None
-        anchor_x: single|str|center
-        anchor_y: single|str|center
-        round_anchor_x: single|str|None
-        round_anchor_y: single|str|None
-        opacity: single|float_or_token|1.0
-        z: single|int_or_token|0
-        animations: ignore
-        reset_animations_events: event_handler|event_handler:ms|None
-        color: single|kivycolor|ffffffff
-        style: list|str|None
-        adjust_top: single|int_or_token|0
-        adjust_bottom: single|int_or_token|0
-        adjust_left: single|int_or_token|0
-        adjust_right: single|int_or_token|0
-        expire: single|secs_or_token|None
-        key: single|str|None
-        widget: single|str|None
-        events_when_added: list|event_posted|None
-        events_when_removed: list|event_posted|None
-    animations:
-        property: list|str|
-        value: list|str|
-        relative: single|bool_or_token|false
-        duration: single|secs_or_token|1
-        timing: single|enum(after_previous,with_previous)|after_previous
-        repeat: single|bool_or_token|false
-        easing: single|str|linear
-        step: single|float|0.0
-    bezier:
-        points: list|num_or_token|
-        thickness: single|float_or_token|1.0
-        cap: single|str|round
-        joint: single|str|round
-        cap_precision: single|int_or_token|10
-        joint_precision: single|int_or_token|10
-        close: single|bool_or_token|false
-        precision: single|int_or_token|180
-        rotation: single|float_or_token|0
-        scale: single|float_or_token|1.0
-    camera:
-        width: single|num_or_token|
-        height: single|num_or_token|
-        camera_index: single|int_or_token|-1
-    display:
-        width: single|num_or_token|
-        height: single|num_or_token|
-        source_display: single|str|window
-        effects: ignore
-    ellipse:
-        width: single|num_or_token|
-        height: single|num_or_token|
-        angle_start: single|int_or_token|0
-        angle_end: single|int_or_token|360
-        rotation: single|float_or_token|0
-        scale: single|float_or_token|1.0
-    image:
-        fps: single|int_or_token|10
-        loops: single|int_or_token|-1
-        image: single|str|
-        auto_play: single|bool_or_token|true
-        start_frame: single|int_or_token|0
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-    line:
-        points: list|num_or_token|
-        thickness: single|float_or_token|1.0
-        cap: single|str|round
-        joint: single|str|round
-        cap_precision: single|int_or_token|10
-        joint_precision: single|int_or_token|10
-        close: single|bool_or_token|false
-    points:
-        points: list|num_or_token|
-        pointsize: single|float_or_token|1.0
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-    quad:
-        points: list|num_or_token|
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-    rectangle:
-        width: single|float_or_token|
-        height: single|float_or_token|
-        corner_radius: single|int_or_token|0
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-    text:
-        text: single|str|
-        font_size: single|num_or_token|15
-        font_name: ignore
-        bitmap_font: single|bool_or_token|false
-        font_kerning: single|bool_or_token|true
-        bold: single|bool_or_token|false
-        italic: single|bool_or_token|false
-        number_grouping: single|bool_or_token|false
-        min_digits: single|int_or_token|0
-        halign: single|str|center
-        valign: single|str|middle
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-        casing: single|str|None
-        outline_color: single|kivycolor|ffffffff
-        outline_width: single|int_or_token|0
-        # text_size: single|int_or_token|None  # sets width of bounding box, not font
-        # shorten: single|bool_or_token|None
-        # mipmap: single|bool_or_token|None
-        # markup: single|bool_or_token|None
-        # line_height: single|float_or_token|None
-        # max_lines: single|int_or_token|None
-        # strip: single|bool_or_token|None
-        # shorten_from: single|str|None
-        # split_str: single|str|None
-        # unicode_errors: single|str|None
-        # antialias: single|bool_or_token|false      # todo
-    text_input:
-        key: single|str|
-        initial_char: single|str|A
-        font_size: single|num_or_token|15
-        font_name: ignore
-        halign: single|str|center
-        valign: single|str|middle
-        shift_left_event: single|event_handler|sw_left_flipper
-        shift_right_event: single|event_handler|sw_right_flipper
-        select_event: single|event_handler|sw_start
-        abort_event: single|event_handler|sw_esc
-        force_complete_event: single|event_handler|None
-        block_events: list|event_handler|None
-        release_events: list|event_handler|None
-        bitmap_font: single|bool_or_token|false
-        bold: single|bool_or_token|false
-        italic: single|bool_or_token|false
-        number_grouping: single|bool_or_token|false
-        min_digits: single|int_or_token|0
-        max_chars: single|int_or_token|3
-        char_list: "single|str|ABCDEFGHIJKLMNOPQRSTUVWXYZ_- "
-        keep_selected_char: single|bool_or_token|true
-        dynamic_x: single|bool_or_token|true
-        dynamic_x_pad: single|int_or_token|0
-    triangle:
-        points: list|num_or_token|
-        rotation: single|int_or_token|0
-        scale: single|float_or_token|1.0
-
 window:
     __valid_in__: machine
     __type__: config

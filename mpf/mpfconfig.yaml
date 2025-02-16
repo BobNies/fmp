@@ -33,10 +33,8 @@ mpf:
         random_event: mpf.config_players.random_event_player.RandomEventPlayer
         show: mpf.config_players.show_player.ShowPlayer
         variable: mpf.config_players.variable_player.VariablePlayer
-        slide_player: mpf.config_players.slide_player.SlidePlayer
         score_queue_player: mpf.config_players.score_queue_player.ScoreQueuePlayer
         blinkenlight: mpf.config_players.blinkenlight_player.BlinkenlightPlayer
-        widget_player: mpf.config_players.widget_player.WidgetPlayer
 
     device_modules:
         coils: mpf.devices.driver.Driver
