@@ -33,7 +33,6 @@ mpf:
         random_event: mpf.config_players.random_event_player.RandomEventPlayer
         show: mpf.config_players.show_player.ShowPlayer
         variable: mpf.config_players.variable_player.VariablePlayer
-        segment_display_player: mpf.config_players.segment_display_player.SegmentDisplayPlayer
         slide_player: mpf.config_players.slide_player.SlidePlayer
         score_queue_player: mpf.config_players.score_queue_player.ScoreQueuePlayer
         blinkenlight: mpf.config_players.blinkenlight_player.BlinkenlightPlayer
@@ -57,8 +56,6 @@ mpf:
         shot_groups: mpf.devices.shot_group.ShotGroup
         flippers: mpf.devices.flipper.Flipper
         diverters: mpf.devices.diverter.Diverter
-        score_reels: mpf.devices.score_reel.ScoreReel
-        score_reel_groups: mpf.devices.score_reel_group.ScoreReelGroup
         spinners: mpf.devices.spinner.Spinner
         playfield_transfers: mpf.devices.playfield_transfer.PlayfieldTransfer
         multiballs: mpf.devices.multiball.Multiball
@@ -68,7 +65,6 @@ mpf:
         servos: mpf.devices.servo.Servo
         achievements: mpf.devices.achievement.Achievement
         achievement_groups: mpf.devices.achievement_group.AchievementGroup
-        digital_score_reels: mpf.devices.digital_score_reel.DigitalScoreReel
         dmds: mpf.devices.dmd.Dmd
         rgb_dmds: mpf.devices.rgb_dmd.RgbDmd
         light_stripes: mpf.devices.light_group.LightStrip
@@ -85,7 +81,6 @@ mpf:
         accruals: mpf.devices.logic_blocks.Accrual
         sequences: mpf.devices.logic_blocks.Sequence
         timers: mpf.devices.timer.Timer
-        segment_displays: mpf.devices.segment_display.segment_display.SegmentDisplay
         sequence_shots: mpf.devices.sequence_shot.SequenceShot
         speedometers: mpf.devices.speedometer.Speedometer
         steppers: mpf.devices.stepper.Stepper
@@ -100,7 +95,6 @@ mpf:
         - mpf.plugins.info_lights.InfoLights
         - mpf.plugins.platform_integration_test_runner.MpfPlatformIntegrationTestRunner
         - mpf.plugins.switch_player.SwitchPlayer
-        - mpf.plugins.virtual_segment_display_connector.VirtualSegmentDisplayConnector
 
     platforms:
         fast: mpf.platforms.fast.fast.FastHardwarePlatform
@@ -148,7 +142,6 @@ logging:
       platform_controller: none
       players: basic  # todo
       plugins: none  # todo
-      score_reel_controller: none
       service_controller: basic
       settings_controller: none
       show_controller: none
@@ -182,7 +175,6 @@ logging:
       platform_controller: basic
       players: full
       plugins: basic
-      score_reel_controller: basic
       service_controller: basic
       settings_controller: basic
       show_controller: basic

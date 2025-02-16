@@ -19,7 +19,6 @@ if MYPY:   # pragma: no cover
     from mpf.platforms.interfaces.switch_platform_interface import SwitchPlatformInterface  # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.light_platform_interface import LightPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.servo_platform_interface import ServoPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
-    from mpf.platforms.interfaces.segment_display_platform_interface import SegmentDisplayPlatformInterface     # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.hardware_sound_platform_interface import HardwareSoundPlatformInterface   # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.accelerometer_platform_interface import AccelerometerPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
@@ -188,85 +187,6 @@ class RgbDmdPlatform(BasePlatform, metaclass=abc.ABCMeta):
 
         """
         raise NotImplementedError
-
-
-class SegmentDisplayPlatform(BasePlatform, metaclass=abc.ABCMeta):
-
-    """Baseclass for 7-segment/6-digits display in MPF."""
-
-    __slots__ = []  # type: List[str]
-
-    def __init__(self, machine):
-        """Add segment display feature."""
-        super().__init__(machine)
-        self.features['has_segment_displays'] = True
-
-    @classmethod
-    def get_segment_display_config_section(cls) -> Optional[str]:
-        """Return addition config section for segment displays."""
-        return None
-
-    def validate_segment_display_section(self, segment_display, config) -> dict:
-        """Validate segment display config for platform."""
-        if self.get_segment_display_config_section():
-            spec = self.get_segment_display_config_section()   # pylint: disable-msg=assignment-from-none
-            config = segment_display.machine.config_validator.validate_config(spec, config, segment_display.name)
-        elif config:
-            raise AssertionError("No platform_config supported but not empty {} for segment display {}".
-                                 format(config, segment_display.name))
-
-        return config
-
-    @abc.abstractmethod
-    async def configure_segment_display(self, number: str, display_size: int,
-                                        platform_settings) -> "SegmentDisplayPlatformInterface":
-        """Subclass this method in a platform module to configure a segment display.
-
-        This method should return a reference to the segment display platform interface
-        method will will receive the text to show.
-        """
-        raise NotImplementedError
-
-
-# pylint: disable-msg=abstract-method
-class SegmentDisplaySoftwareFlashPlatform(SegmentDisplayPlatform, metaclass=abc.ABCMeta):
-
-    """SegmentDisplayPlatform with software flash support."""
-
-    def __init__(self, machine):
-        """Initialize software flash support."""
-        super().__init__(machine)
-        self._displays = set()
-        self._display_flash_task = None
-
-    async def initialize(self):
-        """Start flash task."""
-        await super().initialize()
-        self._display_flash_task = asyncio.create_task(self._display_flash())
-        self._display_flash_task.add_done_callback(Util.raise_exceptions)
-
-    async def _display_flash(self):
-        wait_time_on = self.config['display_flash_duty'] / self.config['display_flash_frequency']
-        wait_time_off = (1 - self.config['display_flash_duty']) / self.config['display_flash_frequency']
-        while True:
-            # set on
-            await asyncio.sleep(wait_time_on)
-            for display in self._displays:
-                display.set_software_flash(True)
-            # set off
-            await asyncio.sleep(wait_time_off)
-            for display in self._displays:
-                display.set_software_flash(False)
-
-    def stop(self):
-        """Cancel flash task."""
-        super().stop()
-        if self._display_flash_task:
-            self._display_flash_task.cancel()
-
-    def _handle_software_flash(self, display):
-        """Register display for flash task."""
-        self._displays.add(display)
 
 
 class AccelerometerPlatform(BasePlatform, metaclass=abc.ABCMeta):

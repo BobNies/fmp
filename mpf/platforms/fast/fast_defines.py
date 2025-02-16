@@ -54,6 +54,12 @@ EXPANSION_BOARD_FEATURES = {
         'breakout_ports': 3,
         'default_address': '48'
     },
+    'FP-EXP-1313': {
+        'min_fw': '0.01',
+        'local_breakouts': ['FP-EXP-1313'],
+        'breakout_ports': 0,
+        'default_address': '30'
+    },
 }
 
 BREAKOUT_FEATURES = {
@@ -91,5 +97,9 @@ BREAKOUT_FEATURES = {
     'FP-PWR-0007': {
         'min_fw': '0.0',
         'device_class': 'mpf.platforms.fast.fast_exp_board',
+    },
+    'FP-EXP-1313': {
+        'min_fw': '0.1',
+        'led_ports': 1,
     },
 }

@@ -1,1 +1,0 @@
-"""Segment display device module."""

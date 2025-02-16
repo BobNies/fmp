@@ -92,8 +92,8 @@ class TextUi(MpfController):
                 "pf_active": (Screen.COLOUR_GREEN, Screen.A_NORMAL, Screen.COLOUR_BLACK),
                 "pf_inactive": (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK),
                 "label": (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK),
-                "title": (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_RED),
-                "title_exit": (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_RED),
+                "title": (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK),
+                "title_exit": (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_BLACK),
                 "footer_cpu": (Screen.COLOUR_CYAN, Screen.A_NORMAL, Screen.COLOUR_BLACK),
                 "footer_path": (Screen.COLOUR_YELLOW, Screen.A_NORMAL, Screen.COLOUR_BLACK),
                 "footer_memory": (Screen.COLOUR_GREEN, Screen.A_NORMAL, Screen.COLOUR_BLACK),
@@ -378,15 +378,10 @@ class TextUi(MpfController):
         title_left.custom_colour = "title"
         title_layout.add_widget(title_left, 0)
 
-        title = 'Mission Pinball Framework v{}'.format(mpf._version.__version__)    # noqa
-        title_text = Label(title, align="^")
-        title_text.custom_colour = "title"
-        title_layout.add_widget(title_text, 1)
-
-        exit_label = Label("< CTRL + C > TO EXIT", align=">")
-        exit_label.custom_colour = "title_exit"
-
-        title_layout.add_widget(exit_label, 2)
+        # title = 'Mission Pinball Framework v{}'.format(mpf._version.__version__)    # noqa
+        # title_text = Label(title, align="^")
+        # title_text.custom_colour = "title"
+        # title_layout.add_widget(title_text, 1)
 
         self.layout = MpfLayout([1, 1, 1, 1], fill_frame=True)
         self.frame.add_layout(self.layout)

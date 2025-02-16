@@ -4,10 +4,8 @@ from typing import Dict, Tuple, Optional, Union
 import asyncio
 import logging
 
-from mpf.devices.segment_display.segment_display_text import ColoredSegmentDisplayText
 from mpf.platforms.interfaces.hardware_sound_platform_interface import HardwareSoundPlatformInterface
 from mpf.platforms.interfaces.i2c_platform_interface import I2cPlatformInterface
-from mpf.platforms.interfaces.segment_display_platform_interface import SegmentDisplayPlatformInterface, FlashingType
 
 from mpf.platforms.interfaces.dmd_platform import DmdPlatformInterface
 from mpf.platforms.interfaces.light_platform_interface import LightPlatformInterface
@@ -16,7 +14,7 @@ from mpf.platforms.interfaces.switch_platform_interface import SwitchPlatformInt
 from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformInterface
 
 from mpf.core.platform import ServoPlatform, SwitchPlatform, DriverPlatform, AccelerometerPlatform, I2cPlatform, \
-    DmdPlatform, RgbDmdPlatform, LightsPlatform, DriverConfig, SwitchConfig, SegmentDisplayPlatform, StepperPlatform, \
+    DmdPlatform, RgbDmdPlatform, LightsPlatform, DriverConfig, SwitchConfig, StepperPlatform, \
     HardwareSoundPlatform, SwitchSettings, DriverSettings, RepulseSettings
 from mpf.core.utility_functions import Util
 from mpf.platforms.interfaces.driver_platform_interface import DriverPlatformInterface, PulseSettings, HoldSettings
@@ -24,7 +22,7 @@ from mpf.platforms.interfaces.driver_platform_interface import DriverPlatformInt
 
 # pylint: disable=too-many-ancestors,too-many-public-methods
 class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform, LightsPlatform, SwitchPlatform,
-                              DriverPlatform, DmdPlatform, RgbDmdPlatform, SegmentDisplayPlatform, StepperPlatform,
+                              DriverPlatform, DmdPlatform, RgbDmdPlatform, StepperPlatform,
                               HardwareSoundPlatform):
 
     """Base class for the virtual hardware platform."""
@@ -203,11 +201,6 @@ class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform,
         """Validate coil sections."""
         return config
 
-    def validate_segment_display_section(self, segment_display, config):
-        """Validate segment display sections."""
-        del segment_display
-        return config
-
     def configure_accelerometer(self, number, config, callback):
         """Configure accelerometer."""
 
@@ -305,14 +298,6 @@ class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform,
         """Configure DMD."""
         del name
         return VirtualDmd()
-
-    async def configure_segment_display(self, number: str, display_size: int,
-                                        platform_settings) -> SegmentDisplayPlatformInterface:
-        """Configure segment display."""
-        del platform_settings
-        del display_size
-        return VirtualSegmentDisplay(number, self.machine)
-
     async def configure_i2c(self, number: str) -> "I2cPlatformInterface":
         """Configure virtual i2c device."""
         return VirtualI2cDevice(number, self._get_initial_i2c(number))
@@ -352,38 +337,6 @@ class VirtualI2cDevice(I2cPlatformInterface):
     async def i2c_read8(self, register):
         """Read data."""
         return self.data[int(register)]
-
-
-class VirtualSegmentDisplay(SegmentDisplayPlatformInterface):
-
-    """Virtual segment display."""
-
-    __slots__ = ["_text", "flashing", "flash_mask", "machine", "post_update_events"]
-
-    def __init__(self, number, machine) -> None:
-        """Initialize virtual segment display."""
-        super().__init__(number)
-        self.machine = machine
-        self._text = None
-        self.flashing = FlashingType.NO_FLASH
-        self.flash_mask = ""
-
-    def set_text(self, text: ColoredSegmentDisplayText, flashing: FlashingType, flash_mask: str) -> None:
-        """Set text."""
-        self._text = text
-        self.flashing = flashing
-        self.flash_mask = flash_mask
-
-    @property
-    def text(self):
-        """Return text."""
-        return self._text.convert_to_str()
-
-    @property
-    def colors(self):
-        """Return colors."""
-        return self._text.get_colors()
-
 
 class VirtualSound(HardwareSoundPlatformInterface):
 

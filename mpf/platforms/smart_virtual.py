@@ -125,47 +125,6 @@ class SwitchEnableAction(SwitchDisableAction):
             self.log.debug("Enabling switch %s due to coil pulse", switch.name)
             self.machine.switch_controller.process_switch_obj(switch, 1, logical=True)
 
-
-class ScoreReelAdvanceAction(BaseSmartVirtualCoilAction):
-
-    """Virtual score reel."""
-
-    # pylint: disable-msg=too-many-arguments
-    def __init__(self, actions, machine, switch_map, limit_lo, limit_hi, name):
-        """Initialize virtual score reel."""
-        super().__init__(actions, machine)
-        self.switch_map = switch_map
-        self.position = limit_lo
-        self.limit_lo = limit_lo
-        self.limit_hi = limit_hi
-        self.name = name
-
-        # set initial position
-        self._update_switches()
-
-    def _perform_action(self):
-        # increment position and handle overflow
-        self.position += 1
-        self.position %= self.limit_hi + 1
-        if self.position < self.limit_lo:
-            self.position = self.limit_lo
-
-        self.machine.log.debug("Virtual score reel for %s at value %s", self.name, self.position)
-
-        self._update_switches()
-
-    def _update_switches(self):
-        # disable all switches except the current position
-        for position, switch in self.switch_map.items():
-            if not switch:
-                continue
-
-            state = self.position == position
-
-            if not self.machine.switch_controller.is_state(switch, state):
-                self.machine.switch_controller.process_switch_obj(switch, state, logical=True)
-
-
 class AddBallToTargetAction(BaseSmartVirtualCoilAction):
 
     """Hit switches when coil is pulsed."""
@@ -288,32 +247,6 @@ class SmartVirtualHardwarePlatform(VirtualPlatform):
         self._initialize_ball_devices()
         self._initialize_drop_targets()
         self._initialize_drop_target_banks()
-        self._initialize_score_reels()
-
-    def _initialize_score_reels(self):
-        for device in self.machine.score_reels.values():
-            if device.config['coil_inc'] and isinstance(device.config['coil_inc'].hw_driver, VirtualDriver):
-                device.config['coil_inc'].hw_driver.action = ScoreReelAdvanceAction(
-                    ["pulse"], self.machine,
-                    {
-                        0: device.config['switch_0'],
-                        1: device.config['switch_1'],
-                        2: device.config['switch_2'],
-                        3: device.config['switch_3'],
-                        4: device.config['switch_4'],
-                        5: device.config['switch_5'],
-                        6: device.config['switch_6'],
-                        7: device.config['switch_7'],
-                        8: device.config['switch_8'],
-                        9: device.config['switch_9'],
-                        10: device.config['switch_10'],
-                        11: device.config['switch_11'],
-                        12: device.config['switch_12']
-                    },
-                    device.config['limit_lo'],
-                    device.config['limit_hi'],
-                    device.name
-                )
 
     def _initialize_drop_targets(self):
         for device in self.machine.drop_targets.values():

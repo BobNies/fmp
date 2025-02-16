@@ -49,7 +49,7 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform,
         super().__init__(machine)
 
         self.config = self.machine.config_validator.validate_config("fast", self.machine.config['fast'])
-        self._configure_device_logging_and_debug("FAST", self.config, url_base='https://fastpinball.com/mpf/error')
+        self._configure_device_logging_and_debug("FAST", self.config)
 
         self.configured_ports = list()
 
