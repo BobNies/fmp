@@ -77,11 +77,6 @@ assets:
         priority: single|int|0
     shows:  # no show-specific config items
         __allow_others__:
-    videos:
-        width: single|num|None
-        height: single|num|None
-        events_when_played: list|event_posted|None
-        events_when_stopped: list|event_posted|None
 auditor:
     __valid_in__: machine
     __type__: config
@@ -1436,19 +1431,6 @@ variable_player:
     block: single|bool|false
     action: single|enum(add,set,add_machine,set_machine)|add
     player: single|int|None
-video_pools:
-    __valid_in__: machine, mode                      # todo add to validator
-    __type__: config_dict
-videos:         # not really used
-    __valid_in__: machine, mode
-    __type__: config_dict
-    load: single|str|preload
-    file: single|str|None
-    priority: single|int|0
-    width: single|num|None
-    height: single|num|None
-    events_when_played: list|event_posted|None
-    events_when_stopped: list|event_posted|None
 virtual_platform_start_active_switches:
     __valid_in__: machine                           # todo add to validator
     __type__: list
@@ -1621,18 +1603,6 @@ widgets:
         points: list|num_or_token|
         rotation: single|int_or_token|0
         scale: single|float_or_token|1.0
-    video:
-        video: single|str|
-        height: single|int_or_token|0
-        width: single|int_or_token|0
-        volume: single|float_or_token|1.0
-        auto_play: single|bool_or_token|true
-        end_behavior: single|enum(loop,pause,stop)|stop
-        control_events: list|subconfig(video_control_events)|None
-video_control_events:
-    action: single|enum(play,pause,stop,seek,volume,position)|
-    event: single|event_handler|
-    value: single|float|None
 
 window:
     __valid_in__: machine
