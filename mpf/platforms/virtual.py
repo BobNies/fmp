@@ -4,7 +4,6 @@ from typing import Dict, Tuple, Optional, Union
 import asyncio
 import logging
 
-from mpf.platforms.interfaces.hardware_sound_platform_interface import HardwareSoundPlatformInterface
 from mpf.platforms.interfaces.i2c_platform_interface import I2cPlatformInterface
 
 from mpf.platforms.interfaces.light_platform_interface import LightPlatformInterface
@@ -14,15 +13,14 @@ from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformI
 
 from mpf.core.platform import ServoPlatform, SwitchPlatform, DriverPlatform, AccelerometerPlatform, I2cPlatform, \
     LightsPlatform, DriverConfig, SwitchConfig, StepperPlatform, \
-    HardwareSoundPlatform, SwitchSettings, DriverSettings, RepulseSettings
+    SwitchSettings, DriverSettings, RepulseSettings
 from mpf.core.utility_functions import Util
 from mpf.platforms.interfaces.driver_platform_interface import DriverPlatformInterface, PulseSettings, HoldSettings
 
 
 # pylint: disable=too-many-ancestors,too-many-public-methods
 class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform, LightsPlatform, SwitchPlatform,
-                              DriverPlatform, StepperPlatform,
-                              HardwareSoundPlatform):
+                              DriverPlatform, StepperPlatform):
 
     """Base class for the virtual hardware platform."""
 
@@ -210,11 +208,6 @@ class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform,
             subtype = "led"
         return VirtualLight("{}-{}".format(subtype, number), platform_settings, self.machine)
 
-    def configure_hardware_sound_system(self, platform_settings) -> "HardwareSoundPlatformInterface":
-        """Configure virtual hardware sound system."""
-        del platform_settings
-        return VirtualSound()
-
     def parse_light_number_to_channels(self, number: str, subtype: str):
         """Parse channel str to a list of channels."""
         if number is None:
@@ -328,37 +321,6 @@ class VirtualI2cDevice(I2cPlatformInterface):
     async def i2c_read8(self, register):
         """Read data."""
         return self.data[int(register)]
-
-class VirtualSound(HardwareSoundPlatformInterface):
-
-    """Virtual hardware sound interface."""
-
-    __slots__ = ["playing", "volume"]
-
-    def __init__(self) -> None:
-        """Initialize virtual hardware sound."""
-        self.playing = None     # type: Optional[Union[int, str]]
-        self.volume = None      # type: Optional[float]
-
-    def play_sound(self, number: int, track: int = 1):
-        """Play virtual sound."""
-        self.playing = number
-
-    def play_sound_file(self, file: str, platform_options: dict, track: int = 1):
-        """Play a sound file."""
-        self.playing = file
-
-    def text_to_speech(self, text: str, platform_options: dict, track: int = 1):
-        """Text to speech output."""
-        self.playing = text
-
-    def set_volume(self, volume: float, track: int = 1):
-        """Set volume."""
-        self.volume = volume
-
-    def stop_all_sounds(self, track: int = 1):
-        """Stop sound."""
-        self.playing = None
 
 class VirtualSwitch(SwitchPlatformInterface):
 

@@ -75,14 +75,7 @@ assets:
         load: single|str|preload
         file: single|str|None
         priority: single|int|0
-    bitmap_fonts:
-        descriptor: ignore
-    images: # no image-specific config items
-        __allow_others__:
-        persist_frame: single|bool|false
     shows:  # no show-specific config items
-        __allow_others__:
-    sounds:
         __allow_others__:
     videos:
         width: single|num|None
@@ -261,12 +254,6 @@ bcp_server:
     ip: single|str|None
     port: single|int|5050
     type: single|str|
-bitmap_fonts:
-    __valid_in__: machine, mode
-    __type__: config_dict
-    file: single|str|None
-    load: single|str|None
-    descriptor: ignore
 blinkenlight_player:
     __valid_in__: machine, mode, show
     __type__: config_player
@@ -716,24 +703,6 @@ high_score:
 info_lights:
     __valid_in__: machine                            # todo add to validator
     __type__: config
-image_pools:
-    __valid_in__: machine, mode                      # todo add to validator
-    __type__: config_dict
-image_templates:
-    __valid_in__: machine
-    __type: config
-images:
-    __valid_in__: machine, mode
-    __type__: config_dict
-    file: single|str|None
-    frame_skips: list|subconfig(images_frame_skips)|None
-    image_template: single|subconfig(images,device)|None
-    load: single|str|None
-images_frame_skips:
-    __valid_in__: machine, mode
-    __type__: config_dict
-    from: single|int|None
-    to: single|int|None
 keyboard:
     __valid_in__: machine                           # todo add to validator
     __type__: config_dict

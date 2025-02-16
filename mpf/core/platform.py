@@ -19,7 +19,6 @@ if MYPY:   # pragma: no cover
     from mpf.platforms.interfaces.switch_platform_interface import SwitchPlatformInterface  # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.light_platform_interface import LightPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.servo_platform_interface import ServoPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
-    from mpf.platforms.interfaces.hardware_sound_platform_interface import HardwareSoundPlatformInterface   # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.accelerometer_platform_interface import AccelerometerPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.i2c_platform_interface import I2cPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
@@ -54,7 +53,6 @@ class BasePlatform(LogMixin, metaclass=abc.ABCMeta):
         self.features['has_drivers'] = False
         self.features['tickless'] = False
         self.features['has_segment_displays'] = False
-        self.features['has_hardware_sound_systems'] = False
         self.features['has_steppers'] = False
         self.features['allow_empty_numbers'] = False
         self.features['hardware_eos_repulse'] = False
@@ -123,22 +121,6 @@ class BasePlatform(LogMixin, metaclass=abc.ABCMeta):
         crashes.
 
         """
-
-class HardwareSoundPlatform(BasePlatform, metaclass=abc.ABCMeta):
-
-    """Baseclass for hardware sounds in MPF."""
-
-    __slots__ = []  # type: List[str]
-
-    def __init__(self, machine):
-        """Add hardware sound feature."""
-        super().__init__(machine)
-        self.features['has_hardware_sound_systems'] = True
-
-    @abc.abstractmethod
-    def configure_hardware_sound_system(self, platform_settings: dict) -> "HardwareSoundPlatformInterface":
-        """Return a reference to the hardware sound interface."""
-        raise NotImplementedError
 
 class AccelerometerPlatform(BasePlatform, metaclass=abc.ABCMeta):
 

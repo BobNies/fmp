@@ -6,9 +6,6 @@ mode:
   game_mode: False
   stop_on_ball_end: False
 
-# Instructions on how to use this mode:
-# https://missionpinball.org/game_logic/tilt
-
 tilt:
   tilt_warning_switch_tag: tilt_warning
   tilt_switch_tag: tilt
@@ -17,32 +14,3 @@ tilt:
   multiple_hit_window: 300ms
   settle_time: 5s
   tilt_warnings_player_var: tilt_warnings
-
-slide_player:
-  tilt_warning_1: tilt_warning_1
-  tilt_warning_2: tilt_warning_2
-  tilt: tilt
-  tilt_clear:
-    tilt:
-      action: remove
-slides:
-  tilt_warning_1:
-    widgets:
-    - type: text
-      text: WARNING
-    expire: 1s
-  tilt_warning_2:
-    widgets:
-    - type: text
-      text: WARNING
-      y: top-2
-      anchor_y: top
-    - type: text
-      text: WARNING
-      y: top-18
-      anchor_y: top
-      expire: 1s
-    expire: 2s
-  tilt:
-  - type: text
-    text: TILT
