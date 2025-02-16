@@ -5,16 +5,13 @@ from typing import Dict, Optional
 
 from serial import SerialException
 
-from mpf.core.platform import (RgbDmdPlatform, DriverConfig, DriverSettings,
+from mpf.core.platform import (DriverConfig, DriverSettings,
                                LightsPlatform, RepulseSettings,
-                               SegmentDisplayPlatform, ServoPlatform,
-                               StepperPlatform,
+                               ServoPlatform, StepperPlatform,
                                SwitchConfig, SwitchSettings)
 from mpf.core.utility_functions import Util
 from mpf.exceptions.config_file_error import ConfigFileError
 from mpf.exceptions.runtime_error import MpfRuntimeError
-from mpf.platforms.fast.fast_audio import FASTAudioInterface
-from mpf.platforms.fast.fast_dmd import FASTDMD
 from mpf.platforms.fast.fast_driver import FASTDriver
 from mpf.platforms.fast.fast_gi import FASTGIString
 from mpf.platforms.fast.fast_io_board import FastIoBoard
@@ -22,7 +19,6 @@ from mpf.platforms.fast.fast_led import (FASTRGBLED, FASTLEDChannel,
                                          FASTExpLED)
 from mpf.platforms.fast.fast_light import FASTMatrixLight
 from mpf.platforms.fast.fast_port_detector import FastPortDetector
-from mpf.platforms.fast.fast_segment_display import FASTSegmentDisplay
 from mpf.platforms.fast.fast_servo import FastServo
 from mpf.platforms.fast.fast_stepper import FastStepper
 from mpf.platforms.fast.fast_switch import FASTSwitch
@@ -31,20 +27,19 @@ from mpf.platforms.interfaces.light_platform_interface import LightPlatformInter
 from mpf.platforms.system11 import System11OverlayPlatform
 
 
-class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
-                           SegmentDisplayPlatform, StepperPlatform,
-                           System11OverlayPlatform):
+class FastHardwarePlatform(ServoPlatform, LightsPlatform,
+                           StepperPlatform, System11OverlayPlatform):
 
     """Platform class for the FAST Pinball hardware."""
 
     __slots__ = ["config", "configured_ports", "machine_type",
-                 "serial_connections", "fast_rgb_leds", "fast_exp_leds", "fast_segs",
+                 "serial_connections", "fast_rgb_leds", "fast_exp_leds",
                  "exp_boards_by_address", "exp_boards_by_name", "exp_breakout_boards",
                  "exp_breakouts_with_leds", "hw_switch_data", "new_switch_data",
                  "io_boards", "io_boards_by_name", "switches_initialized",
                  "drivers_initialized"]
 
-    port_types = ['net', 'exp', 'aud', 'dmd', 'rgb', 'seg', 'emu']
+    port_types = ['net', 'exp', 'aud', 'rgb', 'emu']
 
     def __init__(self, machine):
         """Initialize FAST hardware platform.
@@ -71,7 +66,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
         self.serial_connections = dict()
         self.fast_rgb_leds = dict()
         self.fast_exp_leds = dict()
-        self.fast_segs = list()
         self.exp_boards_by_address = dict()  # k: EE address, v: FastExpansionBoard instances
         self.exp_boards_by_name = dict()  # k: str name, v: FastExpansionBoard instances
         self.exp_breakout_boards = dict()  # k: EEB address, v: FastBreakoutBoard instances
@@ -219,21 +213,11 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
                     FastExpCommunicator
                 communicator = FastExpCommunicator(platform=self, processor=port, config=config)
                 self.serial_connections['exp'] = communicator
-            elif port == 'seg':
-                from mpf.platforms.fast.communicators.seg import \
-                    FastSegCommunicator
-                communicator = FastSegCommunicator(platform=self, processor=port, config=config)
-                self.serial_connections['seg'] = communicator
             elif port == 'aud':
                 from mpf.platforms.fast.communicators.aud import \
                     FastAudCommunicator
                 communicator = FastAudCommunicator(platform=self, processor=port, config=config)
                 self.serial_connections['aud'] = communicator
-            elif port == 'dmd':
-                from mpf.platforms.fast.communicators.dmd import \
-                    FastRgbDmdCommunicator
-                communicator = FastRgbDmdCommunicator(platform=self, processor=port, config=config)
-                self.serial_connections['dmd'] = communicator
             elif port == 'emu':
                 from mpf.platforms.fast.communicators.emu import \
                     FastEmuCommunicator
@@ -697,26 +681,6 @@ class FastHardwarePlatform(ServoPlatform, LightsPlatform, RgbDmdPlatform,
     def _parse_matrix_light_number(self, number):
         number = Util.int_to_hex_string(number)
         return [{"number": number}]
-
-    def configure_rgb_dmd(self, name):
-        """Configure a hardware DMD connected to a FAST controller."""
-        if not self.serial_connections['dmd']:
-            raise AssertionError("A request was made to configure a FAST DMD, "
-                                 "but no connection to a DMD processor is "
-                                 "available.")
-
-        return FASTDMD(self.machine, name, self.serial_connections['dmd'])
-
-    async def configure_segment_display(self, number: str, display_size: int, platform_settings) -> FASTSegmentDisplay:
-        """Configure a segment display."""
-        self.debug_log("Configuring FAST segment display.")
-        del platform_settings
-        if not self.serial_connections['seg']:
-            raise AssertionError("A request was made to configure a FAST "
-                                 "Segment Display but no connection is "
-                                 "available.")
-
-        return FASTSegmentDisplay(int(number), self.serial_connections['seg'])
 
     @classmethod
     def get_coil_config_section(cls):
