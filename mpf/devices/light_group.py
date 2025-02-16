@@ -167,29 +167,3 @@ class LightRing(LightGroup):
             self._create_light_at_index(index, x, y, relative_index)
 
         return False
-
-
-class NeoSegDisplay(LightGroup):
-
-    """A NeoSeg Display from CobraPin."""
-
-    config_section = 'neoseg_displays'
-    collection = 'neoseg_displays'
-    class_label = 'neoseg_display'
-
-    __slots__ = []  # type: List[str]
-
-    def _create_lights(self):
-        if self.config['size'] == '8digit':
-            count = 120
-        elif self.config['size'] == '2digit':
-            count = 30
-        else:
-            count = 0
-
-        for index in range(self.config['number_start'], self.config['number_start'] + count):
-            x = y = None
-            relative_index = index - self.config['number_start']
-            self._create_light_at_index(index, x, y, relative_index)
-
-        return True

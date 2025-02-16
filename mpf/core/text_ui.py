@@ -441,7 +441,7 @@ class TextUi(MpfController):
             self._create_window()
 
         self._update_ball_devices()
-        self._update_stats()
+        #self._update_stats()
 
         self._schedule_draw_screen()
 

@@ -7,14 +7,13 @@ import logging
 from mpf.platforms.interfaces.hardware_sound_platform_interface import HardwareSoundPlatformInterface
 from mpf.platforms.interfaces.i2c_platform_interface import I2cPlatformInterface
 
-from mpf.platforms.interfaces.dmd_platform import DmdPlatformInterface
 from mpf.platforms.interfaces.light_platform_interface import LightPlatformInterface
 from mpf.platforms.interfaces.servo_platform_interface import ServoPlatformInterface
 from mpf.platforms.interfaces.switch_platform_interface import SwitchPlatformInterface
 from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformInterface
 
 from mpf.core.platform import ServoPlatform, SwitchPlatform, DriverPlatform, AccelerometerPlatform, I2cPlatform, \
-    DmdPlatform, RgbDmdPlatform, LightsPlatform, DriverConfig, SwitchConfig, StepperPlatform, \
+    LightsPlatform, DriverConfig, SwitchConfig, StepperPlatform, \
     HardwareSoundPlatform, SwitchSettings, DriverSettings, RepulseSettings
 from mpf.core.utility_functions import Util
 from mpf.platforms.interfaces.driver_platform_interface import DriverPlatformInterface, PulseSettings, HoldSettings
@@ -22,7 +21,7 @@ from mpf.platforms.interfaces.driver_platform_interface import DriverPlatformInt
 
 # pylint: disable=too-many-ancestors,too-many-public-methods
 class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform, LightsPlatform, SwitchPlatform,
-                              DriverPlatform, DmdPlatform, RgbDmdPlatform, StepperPlatform,
+                              DriverPlatform, StepperPlatform,
                               HardwareSoundPlatform):
 
     """Base class for the virtual hardware platform."""
@@ -290,14 +289,6 @@ class VirtualHardwarePlatform(AccelerometerPlatform, I2cPlatform, ServoPlatform,
         self._assert_rule_does_not_exist(enable_switch.hw_switch, coil.hw_driver)
         self.rules[(enable_switch.hw_switch, coil.hw_driver)] = "pulse_on_hit"
 
-    def configure_dmd(self):
-        """Configure DMD."""
-        return VirtualDmd()
-
-    def configure_rgb_dmd(self, name: str):
-        """Configure DMD."""
-        del name
-        return VirtualDmd()
     async def configure_i2c(self, number: str) -> "I2cPlatformInterface":
         """Configure virtual i2c device."""
         return VirtualI2cDevice(number, self._get_initial_i2c(number))
@@ -368,32 +359,6 @@ class VirtualSound(HardwareSoundPlatformInterface):
     def stop_all_sounds(self, track: int = 1):
         """Stop sound."""
         self.playing = None
-
-
-class VirtualDmd(DmdPlatformInterface):
-
-    """Virtual DMD."""
-
-    __slots__ = ["data", "brightness"]
-
-    def __init__(self) -> None:
-        """Initialize virtual DMD."""
-        self.data = None        # type: Optional[bytes]
-        self.brightness = None  # type: Optional[float]
-
-    def update(self, data: bytes):
-        """Update data on the DMD.
-
-        Args:
-        ----
-            data: bytes to send to DMD
-        """
-        self.data = data
-
-    def set_brightness(self, brightness: float):
-        """Set brightness."""
-        self.brightness = brightness
-
 
 class VirtualSwitch(SwitchPlatformInterface):
 

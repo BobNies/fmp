@@ -23,7 +23,6 @@ if MYPY:   # pragma: no cover
     from mpf.platforms.interfaces.stepper_platform_interface import StepperPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.accelerometer_platform_interface import AccelerometerPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.platforms.interfaces.i2c_platform_interface import I2cPlatformInterface    # pylint: disable-msg=cyclic-import,unused-import; # noqa
-    from mpf.platforms.interfaces.dmd_platform import DmdPlatformInterface  # pylint: disable-msg=cyclic-import,unused-import; # noqa
     from mpf.core.machine import MachineController  # pylint: disable-msg=cyclic-import,unused-import; # noqa
 
 
@@ -47,8 +46,6 @@ class BasePlatform(LogMixin, metaclass=abc.ABCMeta):
 
         # Set default platform features. Each platform interface can change
         # these to notify the framework of the specific features it supports.
-        self.features['has_dmds'] = False
-        self.features['has_rgb_dmds'] = False
         self.features['has_accelerometers'] = False
         self.features['has_i2c'] = False
         self.features['has_servos'] = False
@@ -57,7 +54,7 @@ class BasePlatform(LogMixin, metaclass=abc.ABCMeta):
         self.features['has_drivers'] = False
         self.features['tickless'] = False
         self.features['has_segment_displays'] = False
-        self.features['has_hardware_sound_systems'] = True
+        self.features['has_hardware_sound_systems'] = False
         self.features['has_steppers'] = False
         self.features['allow_empty_numbers'] = False
         self.features['hardware_eos_repulse'] = False
@@ -127,29 +124,6 @@ class BasePlatform(LogMixin, metaclass=abc.ABCMeta):
 
         """
 
-
-class DmdPlatform(BasePlatform, metaclass=abc.ABCMeta):
-
-    """Baseclass for DMDs in MPF."""
-
-    __slots__ = []  # type: List[str]
-
-    def __init__(self, machine):
-        """Add dmd feature."""
-        super().__init__(machine)
-        self.features['has_dmds'] = True
-
-    @abc.abstractmethod
-    def configure_dmd(self) -> "DmdPlatformInterface":
-        """Subclass this method in a platform module to configure the DMD.
-
-        This method should return a reference to the DMD's platform interface
-        method will will receive the frame data.
-
-        """
-        raise NotImplementedError
-
-
 class HardwareSoundPlatform(BasePlatform, metaclass=abc.ABCMeta):
 
     """Baseclass for hardware sounds in MPF."""
@@ -165,29 +139,6 @@ class HardwareSoundPlatform(BasePlatform, metaclass=abc.ABCMeta):
     def configure_hardware_sound_system(self, platform_settings: dict) -> "HardwareSoundPlatformInterface":
         """Return a reference to the hardware sound interface."""
         raise NotImplementedError
-
-
-class RgbDmdPlatform(BasePlatform, metaclass=abc.ABCMeta):
-
-    """Baseclass for RGB DMDs in MPF."""
-
-    __slots__ = []  # type: List[str]
-
-    def __init__(self, machine):
-        """Add rgb dmd feature."""
-        super().__init__(machine)
-        self.features['has_rgb_dmds'] = True
-
-    @abc.abstractmethod
-    def configure_rgb_dmd(self, name: str) -> "DmdPlatformInterface":
-        """Subclass this method in a platform module to configure the DMD.
-
-        This method should return a reference to the DMD's platform interface
-        method will will receive the frame data.
-
-        """
-        raise NotImplementedError
-
 
 class AccelerometerPlatform(BasePlatform, metaclass=abc.ABCMeta):
 

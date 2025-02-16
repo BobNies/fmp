@@ -65,11 +65,8 @@ mpf:
         servos: mpf.devices.servo.Servo
         achievements: mpf.devices.achievement.Achievement
         achievement_groups: mpf.devices.achievement_group.AchievementGroup
-        dmds: mpf.devices.dmd.Dmd
-        rgb_dmds: mpf.devices.rgb_dmd.RgbDmd
         light_stripes: mpf.devices.light_group.LightStrip
         light_rings: mpf.devices.light_group.LightRing
-        neoseg_displays: mpf.devices.light_group.NeoSegDisplay
         magnets: mpf.devices.magnet.Magnet
         kickbacks: mpf.devices.kickback.Kickback
         combo_switches: mpf.devices.combo_switch.ComboSwitch
@@ -358,7 +355,6 @@ hardware:
   coils: default
   switches: default
   lights: default
-  dmd: default
   accelerometers: default
   servo_controllers: default
   i2c: default

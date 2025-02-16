@@ -61,8 +61,6 @@ if MYPY:   # pragma: no cover
     from mpf.devices.autofire import AutofireCoil   # pylint: disable-msg=cyclic-import,unused-import
     from mpf.devices.stepper import Stepper     # pylint: disable-msg=cyclic-import,unused-import
     from mpf.config_players.show_player import ShowPlayer   # pylint: disable-msg=cyclic-import,unused-import
-    from mpf.devices.dmd import Dmd     # pylint: disable-msg=cyclic-import,unused-import
-    from mpf.devices.rgb_dmd import RgbDmd  # pylint: disable-msg=cyclic-import,unused-import
     from mpf.devices.flipper import Flipper     # pylint: disable-msg=cyclic-import,unused-import
     from mpf.devices.diverter import Diverter   # pylint: disable-msg=cyclic-import,unused-import
     from mpf.devices.multiball_lock import MultiballLock    # pylint: disable-msg=cyclic-import,unused-import
@@ -182,8 +180,6 @@ class MachineController(LogMixin):
             self.drop_targets = {}                      # type: Dict[str, DropTarget]
             self.drop_target_banks = {}                 # type: Dict[str, DropTargetBank]
             self.servos = {}                            # type: Dict[str, Servo]
-            self.dmds = {}                              # type: Dict[str, Dmd]
-            self.rgb_dmds = {}                          # type: Dict[str, RgbDmd]
             self.flippers = {}                          # type: Dict[str, Flipper]
             self.diverters = {}                         # type: Dict[str, Diverter]
             self.multiball_locks = {}                   # type: Dict[str, MultiballLock]
@@ -661,7 +657,7 @@ class MachineController(LogMixin):
 
     def initialize_mpf(self):
         """Initialize MPF."""
-        self.info_log("Initializing MPF...")
+        self.info_log("Initializing...")
         timeout = 30 if self.options["production"] else None
         try:
             init = asyncio.ensure_future(self.initialize())
@@ -669,12 +665,12 @@ class MachineController(LogMixin):
                                                           timeout=timeout))
         except asyncio.TimeoutError:
             self._crash_shutdown()
-            self.error_log("MPF needed more than %ss for initialization. Aborting!", timeout)
+            self.error_log("Need more than %ss for initialization. Aborting!", timeout)
             return False
         except RuntimeError as e:
             self._crash_shutdown()
             # do not show a runtime useless runtime error
-            self.error_log("Failed to initialize MPF")
+            self.error_log("Failed to initialize")
             report_crash(e, "init_runtime_error", self.config)
             return False
         if init.done() and init.exception():
@@ -682,7 +678,7 @@ class MachineController(LogMixin):
             try:
                 raise init.exception()
             except:     # noqa
-                self.log.exception("Failed to initialize MPF")
+                self.log.exception("Failed to initialize")
                 report_crash(init.exception(), "init_exception", self.config)
             return False
 

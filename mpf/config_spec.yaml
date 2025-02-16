@@ -459,17 +459,6 @@ diverters:
     ball_search_order: single|int|100
     ball_search_hold_time: single|ms|1s
     playfield: single|machine(playfields)|playfield
-dmds:
-    __valid_in__: machine
-    __type__: device
-    platform: single|str|None
-    shades: single|pow2|16
-    fps: single|int|30
-    source_display: single|str|dmd
-    luminosity: list|float|.299, .587, .114
-    brightness: single|float|1.0
-    gamma: single|float|1.0
-    only_send_changes: single|bool|false
 drop_targets:
     __valid_in__: machine
     __type__: device
@@ -511,28 +500,8 @@ effects:
         glow_amplitude: single|float|.1
     color_channel_mix:
         order: list|int|1, 2, 0
-    color_dmd:
-        dot_filter: single|bool|true
-        dots_x: single|int|128
-        dots_y: single|int|32
-        blur: single|float|0.1
-        dot_size: single|float|0.7
-        background_color: single|kivycolor|191919ff
-        gain: single|float|1.0
-        shades: single|int|0
     colorize:
         tint_color: single|kivycolor|ff66ff00
-    dmd:
-        dot_filter: single|bool|true
-        dots_x: single|int|128
-        dots_y: single|int|32
-        blur: single|float|0.1
-        dot_size: single|float|0.7
-        background_color: single|kivycolor|191919ff
-        gain: single|float|1.0
-        shades: single|int|16
-        luminosity: list|float|.299, .587, .114
-        dot_color: single|kivycolor|ff5500  # classic DMD orange
     dot_filter:
         dots_x: single|int|128
         dots_y: single|int|32
@@ -720,8 +689,6 @@ hardware:
     coils: list|str|default
     switches: list|str|default
     lights: list|str|default
-    dmd: list|str|default
-    rgb_dmd: list|str|default
     driverboards: single|str|None
     servo_controllers: list|str|default
     accelerometers: list|str|default
@@ -828,17 +795,6 @@ light_rings:
     start_angle: single|float|0
     radius: single|float|None
     count: single|int|
-    light_template: single|subconfig(lights,device)|
-neoseg_displays:
-    __valid_in__: machine
-    __type__: device
-    number_start: single|int|0
-    start_channel: single|str|None
-    previous: single|machine(lights)|None
-    number_template: single|str|None
-    start_x: single|float|None
-    start_y: single|float|None
-    size: single|enum(2digit,8digit)|8digit
     light_template: single|subconfig(lights,device)|
 lights:
     __valid_in__: machine
@@ -1144,25 +1100,6 @@ random_event_player:
     force_all: single|bool|true
     disable_random: single|bool|false
     scope: single|enum(player,machine)|player
-raspberry_pi:
-    __valid_in__: machine
-    __type__: config
-    ip: single|str|
-    port: single|int|8888
-    debug: single|bool|false
-    console_log: single|enum(none,basic,full)|none
-    file_log: single|enum(none,basic,full)|basic
-rgb_dmds:
-    __valid_in__: machine
-    __type__: device
-    platform: single|str|None
-    fps: single|int|30
-    source_display: single|str|dmd
-    only_send_changes: single|bool|false
-    brightness: single|float|1.0
-    channel_order: single|lstr|rgb
-    gamma: single|float|2.2
-    hardware_brightness: single|template_float|1.0
 score_queue_player:
     __valid_in__: mode
     __type__: config_player
@@ -1619,7 +1556,7 @@ widgets:
     display:
         width: single|num_or_token|
         height: single|num_or_token|
-        source_display: single|str|dmd
+        source_display: single|str|window
         effects: ignore
     ellipse:
         width: single|num_or_token|
