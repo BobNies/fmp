@@ -319,7 +319,7 @@ open class Mode(
 
         debugLog("Mode Stopping.")
 
-        removeModeSwitch Handlers()
+        removeModeSwitchHandlers()
         delay.reset()
 
         // TODO: Post queue event when event system is fully integrated
@@ -497,7 +497,7 @@ open class Mode(
     /**
      * Remove all switch handlers registered by this mode.
      */
-    private fun removeModeSwitch Handlers() {
+    private fun removeModeSwitchHandlers() {
         // TODO: Implement when switch controller is available
         switchHandlers.clear()
     }
