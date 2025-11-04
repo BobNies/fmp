@@ -56,7 +56,7 @@ The original Python project contains **515 Python files** across the following m
    - `MpfRuntimeError.kt` (from `mpf/exceptions/runtime_error.py`)
    - `DriverLimitsError.kt` (from `mpf/exceptions/driver_limits_error.py`)
 
-4. **Core Framework (14 files, ~2,800 lines)**
+4. **Core Framework (17 files, ~3,655 lines)**
    - `CaseInsensitiveMap.kt` (from `mpf/core/case_insensitive_dict.py`)
    - `Clock.kt` (from `mpf/core/clock.py`)
    - `DelayManager.kt` (from `mpf/core/delays.py`)
@@ -72,6 +72,9 @@ The original Python project contains **515 Python files** across the following m
    - `Mode.kt` (from `mpf/core/mode.py`) - Mode system base class ~400 lines
    - `SystemWideDevice.kt` (from `mpf/core/system_wide_device.py`) - System-wide device base ~22 lines
    - `ServiceController.kt` (from `mpf/core/service_controller.py`) - Service mode controller ~210 lines
+   - `Randomizer.kt` (from `mpf/core/randomizer.py`) - Weighted random selection ~283 lines
+   - `FileManager.kt` (from `mpf/core/file_manager.py`) - File loading/saving ~260 lines
+   - `DataManager.kt` (from `mpf/core/data_manager.py`) - Key-value data persistence ~212 lines
 
 5. **Platform Interfaces (1 file, ~246 lines)**
    - `PlatformInterfaces.kt` - Platform abstraction layer
@@ -286,7 +289,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 28 (~5,085 lines of code)
-**Python Files Converted**: ~29 of 515 (~6%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller
+**Total Kotlin Files**: 31 (~5,840 lines of code)
+**Python Files Converted**: ~32 of 515 (~6%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer
 **Based On**: Branch 0.80.x
