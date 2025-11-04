@@ -97,11 +97,14 @@ The original Python project contains **515 Python files** across the following m
      - MpfConfig stub
      - YamlMultifileConfigLoader stub
 
-7. **Device Implementations (4 files, ~1,057 lines)**
+7. **Device Implementations (7 files, ~1,557 lines)**
    - `Switch.kt` (from `mpf/devices/switch.py`) - Switch device with state tracking ~280 lines
    - `SwitchController.kt` (from `mpf/core/switch_controller.py`) - Switch controller ~250 lines
    - `Driver.kt` (from `mpf/devices/driver.py`) - Driver (coil) device ~485 lines
    - `DevicePositionMixin.kt` (from `mpf/devices/device_mixins.py`) - Position mixin ~42 lines
+   - `DigitalOutput.kt` (from `mpf/devices/digital_output.py`) - Digital output (driver/light) ~238 lines
+   - `ShotProfile.kt` (from `mpf/devices/shot_profile.py`) - Shot profile configuration ~36 lines
+   - `PowerSupplyUnit.kt` (from `mpf/devices/power_supply_unit.py`) - PSU power management ~76 lines
 
 8. **Command Line Interface**
    - `Main.kt` - Main entry point
@@ -296,7 +299,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 38 (~6,619 lines of code)
-**Python Files Converted**: ~39 of 515 (~8%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller, ✓ Custom Code, ✓ Plugins, ✓ Async Modes, ✓ Mode Devices
+**Total Kotlin Files**: 41 (~6,969 lines of code)
+**Python Files Converted**: ~42 of 515 (~8%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller, ✓ Custom Code, ✓ Plugins, ✓ Async Modes, ✓ Mode Devices, ✓ Digital Output, ✓ PSU Management
 **Based On**: Branch 0.80.x
