@@ -77,6 +77,11 @@ The original Python project contains **515 Python files** across the following m
    - `DataManager.kt` (from `mpf/core/data_manager.py`) - Key-value data persistence ~212 lines
    - `SettingsController.kt` (from `mpf/core/settings_controller.py`) - Operator settings ~158 lines
    - `LightController.kt` (from `mpf/core/light_controller.py`) - Light updates and monitoring ~207 lines
+   - `CustomCode.kt` (from `mpf/core/custom_code.py`) - User custom code base class ~38 lines
+   - `MpfPlugin.kt` (from `mpf/core/plugin.py`) - Plugin module base class ~59 lines
+   - `RGBAColor.kt` (from `mpf/core/rgba_color.py`) - RGB color with alpha channel ~108 lines
+   - `AsyncMode.kt` (from `mpf/core/async_mode.py`) - Coroutine-based mode base class ~99 lines
+   - `ModeDevice.kt` (from `mpf/core/mode_device.py`) - Mode-specific device base class ~110 lines
 
 5. **Platform Interfaces (1 file, ~246 lines)**
    - `PlatformInterfaces.kt` - Platform abstraction layer
@@ -291,7 +296,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 33 (~6,205 lines of code)
-**Python Files Converted**: ~34 of 515 (~7%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller
+**Total Kotlin Files**: 38 (~6,619 lines of code)
+**Python Files Converted**: ~39 of 515 (~8%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller, ✓ Custom Code, ✓ Plugins, ✓ Async Modes, ✓ Mode Devices
 **Based On**: Branch 0.80.x
