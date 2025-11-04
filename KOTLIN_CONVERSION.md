@@ -71,7 +71,13 @@ The original Python project contains **515 Python files** across the following m
    - `Player.kt` (from `mpf/core/player.py`) - Player management ~240 lines
    - `Mode.kt` (from `mpf/core/mode.py`) - Mode system base class ~400 lines
 
-5. **Command Line Interface**
+5. **Config System Stubs (1 file, ~150 lines)**
+   - `ConfigStubs.kt` - Minimal config infrastructure for integration
+     - ConfigValidator stub
+     - MpfConfig stub
+     - YamlMultifileConfigLoader stub
+
+6. **Command Line Interface**
    - `Main.kt` - Main entry point
    - `CommandLineUtility.kt` - CLI command dispatcher (from `mpf/commands/__init__.py`)
 
@@ -265,7 +271,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 20 (~3,400 lines of code)
-**Python Files Converted**: ~21 of 515 (~4%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode
+**Total Kotlin Files**: 21 (~3,550 lines of code)
+**Python Files Converted**: ~22 of 515 (~4%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs
 **Based On**: Branch 0.80.x
