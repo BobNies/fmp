@@ -56,7 +56,7 @@ The original Python project contains **515 Python files** across the following m
    - `MpfRuntimeError.kt` (from `mpf/exceptions/runtime_error.py`)
    - `DriverLimitsError.kt` (from `mpf/exceptions/driver_limits_error.py`)
 
-4. **Core Framework (8 files, ~900 lines)**
+4. **Core Framework (13 files, ~2,400 lines)**
    - `CaseInsensitiveMap.kt` (from `mpf/core/case_insensitive_dict.py`)
    - `Clock.kt` (from `mpf/core/clock.py`)
    - `DelayManager.kt` (from `mpf/core/delays.py`)
@@ -65,6 +65,10 @@ The original Python project contains **515 Python files** across the following m
    - `EventManager.kt` (from `mpf/core/events.py`) - Complete event system ~350 lines
    - `UtilityFunctions.kt` (from `mpf/core/utility_functions.py`) - Common utilities
    - `RGBColor.kt` (from `mpf/core/rgb_color.py`) - RGB color with 140+ named colors
+   - `Device.kt` (from `mpf/core/device.py`) - Base device class ~200 lines
+   - `DeviceCollection.kt` (from `mpf/core/device_manager.py`) - Device collection ~140 lines
+   - `DeviceManager.kt` (from `mpf/core/device_manager.py`) - Device manager ~260 lines
+   - `Player.kt` (from `mpf/core/player.py`) - Player management ~240 lines
 
 5. **Command Line Interface**
    - `Main.kt` - Main entry point
@@ -73,16 +77,13 @@ The original Python project contains **515 Python files** across the following m
 ## Remaining Components to Convert
 
 ### Core Framework (High Priority)
-- `machine.py` - Main machine controller (~800 lines) - **IN PROGRESS**
-- `mode.py` - Mode system (~600 lines)
-- `platform.py` - Platform base classes (~600 lines)
-- `switch_controller.py` - Switch handling (~700 lines)
-- `device.py` - Base device class
-- `device_manager.py` - Device management
-- `config_loader.py` - Configuration loading
-- `config_validator.py` - Configuration validation
-- `placeholder_manager.py` - Template/placeholder system
-- `player.py` - Player management (~300 lines)
+- `machine.py` - Main machine controller (~800 lines) - **TODO**
+- `mode.py` - Mode system (~600 lines) - **TODO**
+- `platform.py` - Platform base classes (~600 lines) - **TODO**
+- `switch_controller.py` - Switch handling (~700 lines) - **TODO**
+- `config_loader.py` - Configuration loading - **TODO**
+- `config_validator.py` - Configuration validation - **TODO**
+- `placeholder_manager.py` - Template/placeholder system - **TODO**
 
 ### Devices (~30 files)
 - Switches, Lights, Coils, Flippers, etc.
@@ -262,7 +263,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 15 (~1,600 lines of code)
-**Python Files Converted**: ~15 of 515 (~3%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors
+**Total Kotlin Files**: 19 (~3,000 lines of code)
+**Python Files Converted**: ~20 of 515 (~4%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player
 **Based On**: Branch 0.80.x
