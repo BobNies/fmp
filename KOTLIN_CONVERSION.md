@@ -71,6 +71,7 @@ The original Python project contains **515 Python files** across the following m
    - `Player.kt` (from `mpf/core/player.py`) - Player management ~240 lines
    - `Mode.kt` (from `mpf/core/mode.py`) - Mode system base class ~400 lines
    - `SystemWideDevice.kt` (from `mpf/core/system_wide_device.py`) - System-wide device base ~22 lines
+   - `ServiceController.kt` (from `mpf/core/service_controller.py`) - Service mode controller ~210 lines
 
 5. **Platform Interfaces (1 file, ~246 lines)**
    - `PlatformInterfaces.kt` - Platform abstraction layer
@@ -86,10 +87,11 @@ The original Python project contains **515 Python files** across the following m
      - MpfConfig stub
      - YamlMultifileConfigLoader stub
 
-7. **Device Implementations (3 files, ~1,015 lines)**
+7. **Device Implementations (4 files, ~1,057 lines)**
    - `Switch.kt` (from `mpf/devices/switch.py`) - Switch device with state tracking ~280 lines
    - `SwitchController.kt` (from `mpf/core/switch_controller.py`) - Switch controller ~250 lines
    - `Driver.kt` (from `mpf/devices/driver.py`) - Driver (coil) device ~485 lines
+   - `DevicePositionMixin.kt` (from `mpf/devices/device_mixins.py`) - Position mixin ~42 lines
 
 8. **Command Line Interface**
    - `Main.kt` - Main entry point
@@ -284,7 +286,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 26 (~4,833 lines of code)
-**Python Files Converted**: ~27 of 515 (~5%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device
+**Total Kotlin Files**: 28 (~5,085 lines of code)
+**Python Files Converted**: ~29 of 515 (~6%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller
 **Based On**: Branch 0.80.x
