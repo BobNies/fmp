@@ -67,14 +67,26 @@ abstract class MpfController(
 /**
  * Placeholder for MachineController.
  * This will be properly implemented when we convert machine.py
+ *
+ * TODO: This is a stub! Convert machine.py to complete this class.
  */
 class MachineController {
     val config: Map<String, Any> = mapOf(
         "logging" to mapOf(
             "console" to emptyMap<String, String>(),
             "file" to emptyMap<String, String>()
-        )
+        ),
+        "mpf" to mapOf(
+            "device_modules" to emptyMap<String, String>()
+        ),
+        "modes" to emptyList<String>()
     )
 
     val clock: ClockBase = ClockBase()
+    var isShuttingDown: Boolean = false
+
+    // Placeholder for modes collection
+    val modes: MutableMap<String, Mode> = mutableMapOf()
+
+    // TODO: Add events, deviceManager, modeController, etc. when converted
 }
