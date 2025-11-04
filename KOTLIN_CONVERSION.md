@@ -77,7 +77,11 @@ The original Python project contains **515 Python files** across the following m
      - MpfConfig stub
      - YamlMultifileConfigLoader stub
 
-6. **Command Line Interface**
+6. **Device Implementations (2 files, ~530 lines)**
+   - `Switch.kt` (from `mpf/devices/switch.py`) - Switch device with state tracking ~280 lines
+   - `SwitchController.kt` (from `mpf/core/switch_controller.py`) - Switch controller ~250 lines
+
+7. **Command Line Interface**
    - `Main.kt` - Main entry point
    - `CommandLineUtility.kt` - CLI command dispatcher (from `mpf/commands/__init__.py`)
 
@@ -87,7 +91,6 @@ The original Python project contains **515 Python files** across the following m
 - `machine.py` - Main machine controller (~800 lines) - **TODO**
 - `mode_controller.py` - Mode controller (~400 lines) - **TODO**
 - `platform.py` - Platform base classes (~600 lines) - **TODO**
-- `switch_controller.py` - Switch handling (~700 lines) - **TODO**
 - `config_loader.py` - Configuration loading - **TODO**
 - `config_validator.py` - Configuration validation - **TODO**
 - `placeholder_manager.py` - Template/placeholder system - **TODO**
@@ -271,7 +274,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 21 (~3,550 lines of code)
-**Python Files Converted**: ~22 of 515 (~4%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs
+**Total Kotlin Files**: 23 (~4,080 lines of code)
+**Python Files Converted**: ~24 of 515 (~5%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure
 **Based On**: Branch 0.80.x
