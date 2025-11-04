@@ -97,7 +97,7 @@ The original Python project contains **515 Python files** across the following m
      - MpfConfig stub
      - YamlMultifileConfigLoader stub
 
-7. **Device Implementations (14 files, ~2,861 lines)**
+7. **Device Implementations (18 files, ~3,949 lines)**
    - `Switch.kt` (from `mpf/devices/switch.py`) - Switch device with state tracking ~280 lines
    - `SwitchController.kt` (from `mpf/core/switch_controller.py`) - Switch controller ~250 lines
    - `Driver.kt` (from `mpf/devices/driver.py`) - Driver (coil) device ~485 lines
@@ -112,6 +112,10 @@ The original Python project contains **515 Python files** across the following m
    - `TimedSwitch.kt` (from `mpf/devices/timed_switch.py`) - Monitors switches active for specified duration ~182 lines
    - `Blinkenlight.kt` (from `mpf/devices/blinkenlight.py`) - Light that cycles through multiple colors ~207 lines
    - `HardwareSoundSystem.kt` (from `mpf/devices/hardware_sound_system.py`) - Hardware sound for EM/SS machines ~133 lines
+   - `DualWoundCoil.kt` (from `mpf/devices/dual_wound_coil.py`) - Dual-wound coil with main and hold windings ~107 lines
+   - `Magnet.kt` (from `mpf/devices/magnet.py`) - Playfield magnet with grab/release/fling ~326 lines
+   - `AutofireCoil.kt` (from `mpf/devices/autofire.py`) - Hardware rule-based autofire (bumpers, slingshots) ~287 lines
+   - `Motor.kt` (from `mpf/devices/motor.py`) - Positional motor with bi-directional control ~368 lines
 
 8. **Command Line Interface**
    - `Main.kt` - Main entry point
@@ -306,7 +310,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 48 (~8,273 lines of code)
-**Python Files Converted**: ~49 of 515 (~10%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller, ✓ Custom Code, ✓ Plugins, ✓ Async Modes, ✓ Mode Devices, ✓ Digital Output, ✓ PSU Management, ✓ DMD Displays, ✓ Servo Control, ✓ Accelerometer, ✓ Timed Switches, ✓ Blinkenlight, ✓ Hardware Sound
+**Total Kotlin Files**: 52 (~9,361 lines of code)
+**Python Files Converted**: ~53 of 515 (~10%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device, ✓ Service Controller, ✓ File Management, ✓ Data Persistence, ✓ Randomizer, ✓ Settings, ✓ Light Controller, ✓ Custom Code, ✓ Plugins, ✓ Async Modes, ✓ Mode Devices, ✓ Digital Output, ✓ PSU Management, ✓ DMD Displays, ✓ Servo Control, ✓ Accelerometer, ✓ Timed Switches, ✓ Blinkenlight, ✓ Hardware Sound, ✓ Dual Wound Coils, ✓ Magnets, ✓ Autofire Coils, ✓ Motors
 **Based On**: Branch 0.80.x
