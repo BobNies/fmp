@@ -50,16 +50,21 @@ The original Python project contains **515 Python files** across the following m
 2. **Version Information**
    - `src/main/kotlin/org/missionpinball/mpf/Version.kt` (from `mpf/_version.py`)
 
-3. **Exceptions Module**
+3. **Exceptions Module (4 files)**
    - `BaseError.kt` (from `mpf/exceptions/base_error.py`)
    - `ConfigFileError.kt` (from `mpf/exceptions/config_file_error.py`)
    - `MpfRuntimeError.kt` (from `mpf/exceptions/runtime_error.py`)
    - `DriverLimitsError.kt` (from `mpf/exceptions/driver_limits_error.py`)
 
-4. **Core Utilities**
+4. **Core Framework (8 files, ~900 lines)**
    - `CaseInsensitiveMap.kt` (from `mpf/core/case_insensitive_dict.py`)
    - `Clock.kt` (from `mpf/core/clock.py`)
    - `DelayManager.kt` (from `mpf/core/delays.py`)
+   - `LogMixin.kt` (from `mpf/core/logging.py`) - Logging with delegation pattern
+   - `MpfController.kt` (from `mpf/core/mpf_controller.py`) - Base controller class
+   - `EventManager.kt` (from `mpf/core/events.py`) - Complete event system ~350 lines
+   - `UtilityFunctions.kt` (from `mpf/core/utility_functions.py`) - Common utilities
+   - `RGBColor.kt` (from `mpf/core/rgb_color.py`) - RGB color with 140+ named colors
 
 5. **Command Line Interface**
    - `Main.kt` - Main entry point
@@ -68,8 +73,7 @@ The original Python project contains **515 Python files** across the following m
 ## Remaining Components to Convert
 
 ### Core Framework (High Priority)
-- `machine.py` - Main machine controller (~800 lines)
-- `events.py` - Event system (~800 lines)
+- `machine.py` - Main machine controller (~800 lines) - **IN PROGRESS**
 - `mode.py` - Mode system (~600 lines)
 - `platform.py` - Platform base classes (~600 lines)
 - `switch_controller.py` - Switch handling (~700 lines)
@@ -78,6 +82,7 @@ The original Python project contains **515 Python files** across the following m
 - `config_loader.py` - Configuration loading
 - `config_validator.py` - Configuration validation
 - `placeholder_manager.py` - Template/placeholder system
+- `player.py` - Player management (~300 lines)
 
 ### Devices (~30 files)
 - Switches, Lights, Coils, Flippers, etc.
@@ -257,4 +262,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Python Files Remaining**: ~510 of 515
+**Total Kotlin Files**: 15 (~1,600 lines of code)
+**Python Files Converted**: ~15 of 515 (~3%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors
+**Based On**: Branch 0.80.x
