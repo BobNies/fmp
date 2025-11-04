@@ -70,18 +70,28 @@ The original Python project contains **515 Python files** across the following m
    - `DeviceManager.kt` (from `mpf/core/device_manager.py`) - Device manager ~260 lines
    - `Player.kt` (from `mpf/core/player.py`) - Player management ~240 lines
    - `Mode.kt` (from `mpf/core/mode.py`) - Mode system base class ~400 lines
+   - `SystemWideDevice.kt` (from `mpf/core/system_wide_device.py`) - System-wide device base ~22 lines
 
-5. **Config System Stubs (1 file, ~150 lines)**
+5. **Platform Interfaces (1 file, ~246 lines)**
+   - `PlatformInterfaces.kt` - Platform abstraction layer
+     - BasePlatform abstract class
+     - DriverPlatform abstract class
+     - DriverPlatformInterface abstract class
+     - DriverConfig, PulseSettings, HoldSettings data classes
+     - RepulseSettings data class
+
+6. **Config System Stubs (1 file, ~150 lines)**
    - `ConfigStubs.kt` - Minimal config infrastructure for integration
      - ConfigValidator stub
      - MpfConfig stub
      - YamlMultifileConfigLoader stub
 
-6. **Device Implementations (2 files, ~530 lines)**
+7. **Device Implementations (3 files, ~1,015 lines)**
    - `Switch.kt` (from `mpf/devices/switch.py`) - Switch device with state tracking ~280 lines
    - `SwitchController.kt` (from `mpf/core/switch_controller.py`) - Switch controller ~250 lines
+   - `Driver.kt` (from `mpf/devices/driver.py`) - Driver (coil) device ~485 lines
 
-7. **Command Line Interface**
+8. **Command Line Interface**
    - `Main.kt` - Main entry point
    - `CommandLineUtility.kt` - CLI command dispatcher (from `mpf/commands/__init__.py`)
 
@@ -274,7 +284,7 @@ This Kotlin conversion maintains the original MIT license of the Mission Pinball
 
 **Conversion Status**: In Progress
 **Last Updated**: 2025-11-04
-**Total Kotlin Files**: 23 (~4,080 lines of code)
-**Python Files Converted**: ~24 of 515 (~5%)
-**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure
+**Total Kotlin Files**: 26 (~4,833 lines of code)
+**Python Files Converted**: ~27 of 515 (~5%)
+**Key Systems Complete**: ✓ Event System, ✓ Logging, ✓ Utilities, ✓ Colors, ✓ Devices, ✓ Player, ✓ Mode, ✓ Config Stubs, ✓ Switch Infrastructure, ✓ Platform Interfaces, ✓ Driver Device
 **Based On**: Branch 0.80.x
