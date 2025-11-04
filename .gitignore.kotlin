@@ -1,0 +1,20 @@
+# Kotlin/Gradle build artifacts
+.gradle/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+.idea/
+*.iws
+*.ipr
+.kotlin/
+
+# Gradle wrapper
+!gradle-wrapper.jar
+
+# Local configuration
+local.properties
