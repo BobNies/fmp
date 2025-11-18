@@ -1,0 +1,16 @@
+{
+    "name": "MPF.Devices",
+    "rootNamespace": "MPF.Devices",
+    "references": [
+        "MPF.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
